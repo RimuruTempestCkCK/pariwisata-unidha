@@ -230,5 +230,62 @@ class DatabaseSeeder extends Seeder
         foreach ($landingItems as $elem) {
             LandingElement::create($elem);
         }
+
+        // 8. Links Eksternal & Direktori
+        \App\Models\Link::truncate();
+        $links = [
+            [
+                'title' => 'Website Resmi Universitas Dharma Andalas',
+                'url' => 'https://unidha.ac.id',
+                'description' => 'Portal utama universitas yang memuat profil pimpinan, seluruh fakultas, lembaga penjaminan mutu, dan informasi universitas.',
+                'category' => 'Portal Resmi',
+                'order' => 1,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Instagram Resmi S1 Pariwisata',
+                'url' => 'https://instagram.com/s1pariwisata_unidha',
+                'description' => 'Media sosial resmi program studi untuk publikasi visual perkuliahan, warta dosen, dan pencapaian akademik.',
+                'category' => 'Media Sosial',
+                'order' => 2,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Instagram HIMPAR UNIDHA',
+                'url' => 'https://instagram.com/himpar.unidha',
+                'description' => 'Kanal informasi kegiatan mahasiswa, dokumentasi acara kampus, studi trip, dan kepengurusan himpunan.',
+                'category' => 'Organisasi Mahasiswa',
+                'order' => 3,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Portal Penerimaan Mahasiswa Baru (SPMB 2026)',
+                'url' => '/spmb-2026',
+                'description' => 'Halaman informasi pendaftaran calon mahasiswa baru Program Studi S1 Pariwisata UNIDHA tahun akademik 2026/2027.',
+                'category' => 'Akademik & SPMB',
+                'order' => 4,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Yayasan Pendidikan Dharma Andalas',
+                'url' => 'https://unidha.ac.id',
+                'description' => 'Badan penyelenggara pendidikan tinggi Universitas Dharma Andalas yang berkomitmen memajukan SDM Sumatera Barat.',
+                'category' => 'Institusi Penyelenggara',
+                'order' => 5,
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Kementerian Pariwisata RI',
+                'url' => 'https://kemenparekraf.go.id',
+                'description' => 'Regulasi, data kepariwisataan nasional, kalender karisma event nusantara, dan riset pariwisata Indonesia.',
+                'category' => 'Mitra & Pemerintah',
+                'order' => 6,
+                'is_active' => true,
+            ],
+        ];
+
+        foreach ($links as $link) {
+            \App\Models\Link::create($link);
+        }
     }
 }

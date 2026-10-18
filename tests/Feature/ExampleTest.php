@@ -61,6 +61,8 @@ class ExampleTest extends TestCase
             '/admin/banner-logo',
             '/admin/profil',
             '/admin/kurikulum',
+            '/admin/kemahasiswaan',
+            '/admin/link',
             '/admin/pengaturan',
         ];
 

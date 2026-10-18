@@ -34,6 +34,14 @@
                 </p>
             </div>
 
+            @php
+                $contactAddress = \App\Models\Setting::get('contact_address', \App\Models\Setting::get('address', 'Jl. Sawahan No.103, Simpang Haru, Kec. Padang Timur, Kota Padang, Sumatera Barat 25000, Indonesia.'));
+                $contactEmail = \App\Models\Setting::get('contact_email', \App\Models\Setting::get('email', 'pariwisata@unidha.ac.id'));
+                $socialIg = \App\Models\Setting::get('social_instagram', \App\Models\Setting::get('instagram_prodi', '@s1pariwisata_unidha'));
+                $socialHimpar = \App\Models\Setting::get('social_himpar', \App\Models\Setting::get('instagram_himpar', '@himpar.unidha'));
+                $igClean = ltrim($socialIg, '@');
+                $himparClean = ltrim($socialHimpar, '@');
+            @endphp
             <!-- List Kontak -->
             <div class="space-y-5">
                 <!-- Alamat -->
@@ -44,7 +52,7 @@
                     <div>
                         <h3 class="text-sm font-bold text-slate-900">Alamat Kampus</h3>
                         <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                            Jl. Sawahan No.103, Simpang Haru, Kec. Padang Timur, Kota Padang, Sumatera Barat 25000, Indonesia.
+                            {{ $contactAddress }}
                         </p>
                     </div>
                 </div>
@@ -57,8 +65,8 @@
                     <div>
                         <h3 class="text-sm font-bold text-slate-900">Email Resmi</h3>
                         <p class="text-xs text-slate-600 mt-1">Hubungi surat elektronik kami untuk korespondensi resmi:</p>
-                        <a href="mailto:pariwisata@unidha.ac.id" class="inline-block mt-1 text-sm font-bold text-blue-900 hover:text-amber-600 transition-colors">
-                            pariwisata@unidha.ac.id
+                        <a href="mailto:{{ $contactEmail }}" class="inline-block mt-1 text-sm font-bold text-blue-900 hover:text-amber-600 transition-colors">
+                            {{ $contactEmail }}
                         </a>
                     </div>
                 </div>
@@ -71,8 +79,8 @@
                     <div>
                         <h3 class="text-sm font-bold text-slate-900">Instagram Program Studi</h3>
                         <p class="text-xs text-slate-600 mt-1">Ikuti kegiatan resmi perkuliahan dan prodi:</p>
-                        <a href="https://instagram.com/s1pariwisata_unidha" target="_blank" rel="noopener noreferrer" class="inline-block mt-1 text-sm font-bold text-pink-600 hover:text-pink-700 transition-colors">
-                            @s1pariwisata_unidha
+                        <a href="https://instagram.com/{{ $igClean }}" target="_blank" rel="noopener noreferrer" class="inline-block mt-1 text-sm font-bold text-pink-600 hover:text-pink-700 transition-colors">
+                            {{ $socialIg }}
                         </a>
                     </div>
                 </div>
@@ -85,8 +93,8 @@
                     <div>
                         <h3 class="text-sm font-bold text-slate-900">Instagram HIMPAR UNIDHA</h3>
                         <p class="text-xs text-slate-600 mt-1">Aktivitas himpunan & kreasi mahasiswa:</p>
-                        <a href="https://instagram.com/himpar.unidha" target="_blank" rel="noopener noreferrer" class="inline-block mt-1 text-sm font-bold text-purple-700 hover:text-purple-800 transition-colors">
-                            @himpar.unidha
+                        <a href="https://instagram.com/{{ $himparClean }}" target="_blank" rel="noopener noreferrer" class="inline-block mt-1 text-sm font-bold text-purple-700 hover:text-purple-800 transition-colors">
+                            {{ $socialHimpar }}
                         </a>
                     </div>
                 </div>

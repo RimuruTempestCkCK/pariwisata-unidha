@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\BannerLogoController;
 use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\CurriculumController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\LinkController;
+use App\Http\Controllers\Admin\KemahasiswaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +71,17 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::put('/kurikulum/{kurikulum}', [CurriculumController::class, 'update'])->name('kurikulum.update');
     Route::delete('/kurikulum/{kurikulum}', [CurriculumController::class, 'destroy'])->name('kurikulum.destroy');
 
-    // Pengaturan Website & Footer
+    // Kemahasiswaan & HIMPAR
+    Route::get('/kemahasiswaan', [KemahasiswaanController::class, 'index'])->name('kemahasiswaan');
+    Route::post('/kemahasiswaan', [KemahasiswaanController::class, 'update'])->name('kemahasiswaan.update');
+
+    // Link & Direktori CRUD
+    Route::get('/link', [LinkController::class, 'index'])->name('link');
+    Route::post('/link', [LinkController::class, 'store'])->name('link.store');
+    Route::put('/link/{link}', [LinkController::class, 'update'])->name('link.update');
+    Route::delete('/link/{link}', [LinkController::class, 'destroy'])->name('link.destroy');
+
+    // Pengaturan Website, Kontak & Footer
     Route::get('/pengaturan', [SettingController::class, 'index'])->name('pengaturan');
     Route::post('/pengaturan', [SettingController::class, 'update'])->name('pengaturan.update');
 });
