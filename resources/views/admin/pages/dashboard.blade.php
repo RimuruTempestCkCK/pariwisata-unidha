@@ -113,8 +113,7 @@
                                     {{ $item->date_text ?? $item->created_at->translatedFormat('d M Y') }}
                                 </td>
                                 <td class="px-6 py-4 text-right whitespace-nowrap">
-                                    <a href="{{ route('berita.show', $item->slug) }}" target="_blank" class="text-blue-900 hover:underline font-bold mr-3">Pratinjau</a>
-                                    <a href="{{ route('admin.berita') }}" class="text-amber-600 hover:underline font-semibold">Sunting</a>
+                                    <a href="{{ route('admin.berita') }}" class="text-blue-900 hover:underline font-bold">Kelola Berita &rarr;</a>
                                 </td>
                             </tr>
                         @empty
@@ -130,27 +129,27 @@
         <!-- Quick Info & Link Cepat -->
         <div class="lg:col-span-4 space-y-6">
             <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-4">
-                <h3 class="text-sm font-bold text-slate-900">Pintasan Halaman Publik</h3>
+                <h3 class="text-sm font-bold text-slate-900">Pintasan Menu Pengelolaan</h3>
                 <ul class="text-xs space-y-3">
                     <li class="flex items-center justify-between pb-2 border-b border-slate-100">
-                        <span class="text-slate-600">Beranda (Hero, Visi, Karier)</span>
-                        <a href="{{ route('home') }}" target="_blank" class="text-blue-900 hover:underline font-bold">Buka &rarr;</a>
+                        <span class="text-slate-600">Logo & Banner Hero</span>
+                        <a href="{{ route('admin.banner-logo') }}" class="text-blue-900 hover:underline font-bold">Kelola &rarr;</a>
                     </li>
                     <li class="flex items-center justify-between pb-2 border-b border-slate-100">
                         <span class="text-slate-600">Profil & Visi Misi</span>
-                        <a href="{{ route('profil') }}" target="_blank" class="text-blue-900 hover:underline font-bold">Buka &rarr;</a>
+                        <a href="{{ route('admin.profil') }}" class="text-blue-900 hover:underline font-bold">Kelola &rarr;</a>
                     </li>
                     <li class="flex items-center justify-between pb-2 border-b border-slate-100">
-                        <span class="text-slate-600">Akademik & Kurikulum</span>
-                        <a href="{{ route('akademik') }}" target="_blank" class="text-blue-900 hover:underline font-bold">Buka &rarr;</a>
+                        <span class="text-slate-600">Tata Kelola & Pimpinan</span>
+                        <a href="{{ route('admin.pimpinan') }}" class="text-blue-900 hover:underline font-bold">Kelola &rarr;</a>
                     </li>
                     <li class="flex items-center justify-between pb-2 border-b border-slate-100">
-                        <span class="text-slate-600">Kemahasiswaan (HIMPAR)</span>
-                        <a href="{{ route('kemahasiswaan') }}" target="_blank" class="text-blue-900 hover:underline font-bold">Buka &rarr;</a>
+                        <span class="text-slate-600">Kurikulum & Akademik</span>
+                        <a href="{{ route('admin.kurikulum') }}" class="text-blue-900 hover:underline font-bold">Kelola &rarr;</a>
                     </li>
                     <li class="flex items-center justify-between">
-                        <span class="text-slate-600">Penerimaan Mahasiswa Baru</span>
-                        <a href="{{ route('spmb') }}" target="_blank" class="text-amber-600 hover:underline font-bold">SPMB 2026 &rarr;</a>
+                        <span class="text-slate-600">Kemahasiswaan & HIMPAR</span>
+                        <a href="{{ route('admin.kemahasiswaan') }}" class="text-amber-600 hover:underline font-bold">Kelola &rarr;</a>
                     </li>
                 </ul>
             </div>

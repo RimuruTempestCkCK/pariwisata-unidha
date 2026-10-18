@@ -12,11 +12,6 @@
                 Atur logo utama website, banner hero beranda, serta tema header halaman publik.
             </p>
         </div>
-        <div class="flex items-center gap-2">
-            <a href="{{ route('home') }}" target="_blank" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all">
-                Lihat Beranda Publik
-            </a>
-        </div>
     </div>
 
     <!-- Live Preview Alert Note -->
