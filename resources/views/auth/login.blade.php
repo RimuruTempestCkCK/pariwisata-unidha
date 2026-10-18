@@ -32,28 +32,28 @@
         }
     </style>
 </head>
-<body class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-slate-800 antialiased relative overflow-x-hidden selection:bg-amber-500 selection:text-white">
+<body class="min-h-screen w-full flex flex-col items-center justify-center p-3 sm:p-6 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-slate-800 antialiased relative overflow-x-hidden selection:bg-amber-500 selection:text-white">
     <!-- Ambient Blur Glows -->
     <div class="fixed -top-32 -left-32 w-72 sm:w-96 h-72 sm:h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
     <div class="fixed -bottom-32 -right-32 w-72 sm:w-96 h-72 sm:h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="w-full max-w-md relative z-10 my-auto py-8">
+    <div class="w-full max-w-sm sm:max-w-md relative z-10 my-auto py-2 sm:py-6">
         <!-- Logo & Brand Header -->
-        <div class="text-center mb-6 sm:mb-8 space-y-2">
+        <div class="text-center mb-4 sm:mb-6 space-y-1 sm:space-y-2">
             <a href="{{ route('home') }}" class="inline-flex items-center gap-2.5 sm:gap-3 group">
-                <x-app-logo class="w-11 h-11 sm:w-12 sm:h-12 shrink-0" svg-class="w-6 h-6 sm:w-7 sm:h-7" />
+                <x-app-logo class="w-10 h-10 sm:w-12 sm:h-12 shrink-0" svg-class="w-6 h-6 sm:w-7 sm:h-7" />
                 <div class="text-left">
                     <span class="block text-[10px] sm:text-xs font-bold tracking-wider uppercase text-amber-400">PORTAL CMS ADMIN</span>
                     <span class="block text-sm sm:text-base font-extrabold text-white leading-tight">S1 PARIWISATA UNIDHA</span>
                 </div>
             </a>
-            <p class="text-[11px] sm:text-xs text-slate-400 px-4">Masuk untuk mengelola warta, data prodi, dan pengaturan website.</p>
+            <p class="text-[11px] sm:text-xs text-slate-400 px-2">Masuk untuk mengelola warta, data prodi, dan website.</p>
         </div>
 
         <!-- Login Card -->
-        <div class="bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl border border-white/20 space-y-5 sm:space-y-6">
-            <div class="space-y-1">
-                <h1 class="text-lg sm:text-xl font-extrabold text-slate-900">Selamat Datang Pengelola</h1>
+        <div class="bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-9 shadow-2xl border border-white/20 space-y-4 sm:space-y-6">
+            <div class="space-y-0.5 sm:space-y-1">
+                <h1 class="text-base sm:text-xl font-extrabold text-slate-900">Selamat Datang Pengelola</h1>
                 <p class="text-[11px] sm:text-xs text-slate-500">Masukkan kredensial akun administrator Anda.</p>
             </div>
 
