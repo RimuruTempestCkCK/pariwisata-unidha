@@ -60,24 +60,36 @@
          @mouseleave="startAutoSlide()">
 
     <!-- BACKGROUND SLIDES -->
-    <div class="absolute inset-0 z-0">
-        <template x-for="(slide, index) in slides" :key="index">
-            <div x-show="activeSlide === index"
-                 x-transition:enter="transition-opacity ease-out duration-1000"
-                 x-transition:enter-start="opacity-0"
-                 x-transition:enter-end="opacity-100"
-                 x-transition:leave="transition-opacity ease-in duration-1000 absolute inset-0"
-                 x-transition:leave-start="opacity-100"
-                 x-transition:leave-end="opacity-0"
-                 class="absolute inset-0 w-full h-full">
-                <img :src="slide.image" 
-                     :alt="slide.title" 
-                     class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-7000 ease-out">
-            </div>
-        </template>
-        <!-- Overlay Gelap Elegan khas Web Sekolah Starter -->
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/75 to-slate-950/40"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-black/30"></div>
+    <div class="absolute inset-0 z-0 bg-slate-950">
+        <!-- Static Default First Slide (Instant display before JS hydrates) -->
+        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 0 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
+            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-03-at-16.18.04.jpeg" 
+                 alt="S1 Pariwisata UNIDHA" 
+                 class="w-full h-full object-cover object-center">
+        </div>
+
+        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 1 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
+            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/Hotel-MICE-Modern-di-Pusat-Ubud-SenS-Hotel-Spa-Hadirkan-Ballroom-dan-Fasilitas-Konferensi-Lengkap-1-e1747237185343.jpg" 
+                 alt="Hospitality & MICE" 
+                 class="w-full h-full object-cover object-center">
+        </div>
+
+        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 2 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
+            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/gambar-tour-guide-10.jpg" 
+                 alt="Tour & Travel" 
+                 class="w-full h-full object-cover object-center">
+        </div>
+
+        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 3 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
+            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/QzxyPf2tOCFlYzYknAmqPYhGnx00ti4HEadIQdJa-scaled.jpg" 
+                 alt="SPMB UNIDHA" 
+                 class="w-full h-full object-cover object-center">
+        </div>
+
+        <!-- Professional Multi-layer Dark Gradient Overlay for Maximum Typography Clarity -->
+        <div class="absolute inset-0 bg-slate-950/75 z-2 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-2 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40 z-2 pointer-events-none"></div>
     </div>
 
     <!-- HERO CONTENT CONTAINER -->

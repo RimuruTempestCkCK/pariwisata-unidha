@@ -19,6 +19,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     @endif
 
+    <!-- Alpine.js for Interactive Slider & Mobile Menus -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
