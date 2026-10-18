@@ -4,193 +4,167 @@
 @section('meta_description', 'Program Studi S1 Pariwisata Universitas Dharma Andalas Padang. Slogan: Creating Memories, Inspiring Journey, And Connecting Cultures, Creating Futures.')
 
 @section('content')
-<!-- HERO SECTION -->
-<section class="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white overflow-hidden py-20 lg:py-32">
-    <!-- Background Texture & Glow -->
-    <div class="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:24px_24px]"></div>
-    <div class="absolute -top-40 -right-40 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- HERO SECTION WITH FULLSCREEN BACKGROUND SLIDER -->
+<section class="relative min-h-[640px] lg:min-h-[750px] flex items-center text-white overflow-hidden" 
+         x-data="{
+            activeSlide: 0,
+            slides: [
+                {
+                    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=85',
+                    tag: 'Program Studi Unggulan',
+                    headline: 'Mempersiapkan Pemimpin Masa Depan Industri Pariwisata',
+                    subhead: 'Menghubungkan Pesona Minangkabau dengan Standar Pariwisata Global'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=85',
+                    tag: 'Hospitality & MICE',
+                    headline: 'Karier Profesional Perhotelan & Event Internasional',
+                    subhead: 'Kurikulum Terapan, Praktik Hotel Bintang Lima & Wedding Convention Planner'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1920&q=85',
+                    tag: 'Destinasi & Ekowisata',
+                    headline: 'Eksplorasi Pariwisata Berkelanjutan & Manajemen Wisata',
+                    subhead: 'Keahlian Perancang Perjalanan, Tour Planner, dan Pengembangan Desa Wisata'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1920&q=85',
+                    tag: 'Penerimaan Mahasiswa Baru 2026',
+                    headline: 'Raih Gelar Sarjana Pariwisata (S.Par.) di UNIDHA Padang',
+                    subhead: 'Tersedia Beasiswa Prestasi & Program Magang Bersertifikasi Industri'
+                }
+            ],
+            timer: null,
+            init() {
+                this.startAutoSlide();
+            },
+            startAutoSlide() {
+                this.timer = setInterval(() => {
+                    this.nextSlide();
+                }, 6000);
+            },
+            stopAutoSlide() {
+                if (this.timer) clearInterval(this.timer);
+            },
+            nextSlide() {
+                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+            },
+            prevSlide() {
+                this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
+            },
+            goToSlide(index) {
+                this.activeSlide = index;
+            }
+         }"
+         @mouseenter="stopAutoSlide()" 
+         @mouseleave="startAutoSlide()">
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            <!-- Left Headline & Copy -->
-            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide">
-                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                    <span>Let's Go to Join With Us</span>
-                </div>
+    <!-- BACKGROUND SLIDER IMAGES -->
+    <div class="absolute inset-0 z-0">
+        <template x-for="(slide, index) in slides" :key="index">
+            <div x-show="activeSlide === index"
+                 x-transition:enter="transition-opacity ease-out duration-1000"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition-opacity ease-in duration-1000 absolute inset-0"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="absolute inset-0 w-full h-full">
+                <img :src="slide.image" 
+                     :alt="slide.headline" 
+                     class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-10000 ease-out">
+            </div>
+        </template>
+        <!-- Professional Multi-layer Gradient Dark Overlay for Perfect Typography Readability -->
+        <div class="absolute inset-0 bg-slate-950/70"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50"></div>
+    </div>
 
-                <h1 class="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                    Program Studi S1 Pariwisata <br class="hidden sm:inline">
+    <!-- HERO CONTENT CONTAINER -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 w-full">
+        <div class="max-w-3xl space-y-6">
+            <!-- Badge Slogan -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-bold tracking-wide backdrop-blur-md">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+                <span>Let's Go to Join With Us</span>
+                <span class="text-amber-200/50 hidden sm:inline">&bull;</span>
+                <span class="text-white/90 hidden sm:inline font-semibold" x-text="slides[activeSlide].tag"></span>
+            </div>
+
+            <!-- Main Heading -->
+            <div class="space-y-3">
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Program Studi S1 Pariwisata <br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-sky-300">
                         Universitas Dharma Andalas
                     </span>
                 </h1>
-
                 <p class="font-serif-heading text-lg sm:text-xl lg:text-2xl text-amber-200/90 italic font-medium">
                     “Creating Memories, Inspiring Journey, And Connecting Cultures, Creating Futures”
                 </p>
-
-                <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                    Mempersiapkan sarjana pariwisata yang visioner, kompeten, dan siap memimpin industri pariwisata nasional maupun internasional melalui kurikulum terapan, praktik langsung, dan jejaring industri hospitality.
-                </p>
-
-                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                    <a href="{{ route('spmb') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-extrabold text-base text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-lg shadow-amber-500/30 hover:shadow-xl transition-all transform hover:-translate-y-0.5">
-                        <span>JOIN US SEKARANG</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </a>
-                    <a href="{{ route('profil') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-base text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 transition-all">
-                        <span>Kenali Program Studi</span>
-                    </a>
-                </div>
-
-                <!-- Stats summary / highlight strip -->
-                <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-center lg:text-left">
-                    <div>
-                        <div class="text-xl sm:text-2xl font-extrabold text-white">S1 (Sarjana)</div>
-                        <div class="text-xs text-slate-400 mt-0.5">Jenjang Pendidikan</div>
-                    </div>
-                    <div>
-                        <div class="text-xl sm:text-2xl font-extrabold text-amber-400">Padang</div>
-                        <div class="text-xs text-slate-400 mt-0.5">Sumatera Barat</div>
-                    </div>
-                    <div>
-                        <div class="text-xl sm:text-2xl font-extrabold text-sky-400">SPMB 2026</div>
-                        <div class="text-xs text-slate-400 mt-0.5">Pendaftaran Dibuka</div>
-                    </div>
-                </div>
             </div>
 
-            <!-- Right Visual Slider Card -->
-            <div class="lg:col-span-5 relative" x-data="{
-                activeSlide: 0,
-                slides: [
-                    {
-                        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
-                        tag: 'Kampus Unggulan',
-                        tagColor: 'bg-amber-400 text-slate-950',
-                        title: 'Membangun Masa Depan Pariwisata Indonesia',
-                        desc: 'Menghubungkan potensi pariwisata daerah Minangkabau dengan standar industri global.'
-                    },
-                    {
-                        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80',
-                        tag: 'Hospitality & MICE',
-                        tagColor: 'bg-sky-400 text-slate-950',
-                        title: 'Manajemen Perhotelan & Event Internasional',
-                        desc: 'Praktik industri perhotelan bintang lima, MICE, dan perencanaan acara profesional.'
-                    },
-                    {
-                        image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=80',
-                        tag: 'Tour & Travel',
-                        tagColor: 'bg-emerald-400 text-slate-950',
-                        title: 'Eksplorasi Destinasi & Sustainable Tourism',
-                        desc: 'Mengembangkan ekowisata berkelanjutan dan kepemanduan wisata bertaraf dunia.'
-                    },
-                    {
-                        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80',
-                        tag: 'SPMB 2026',
-                        tagColor: 'bg-rose-400 text-slate-950',
-                        title: 'Beasiswa & Jalur Prestasi Pariwisata',
-                        desc: 'Raih gelar Sarjana Pariwisata (S.Par.) bersama pengajar berkompeten dan jaringan alumni luas.'
-                    }
-                ],
-                timer: null,
-                init() {
-                    this.startAutoSlide();
-                },
-                startAutoSlide() {
-                    this.timer = setInterval(() => {
-                        this.nextSlide();
-                    }, 5000);
-                },
-                stopAutoSlide() {
-                    if (this.timer) clearInterval(this.timer);
-                },
-                nextSlide() {
-                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-                },
-                prevSlide() {
-                    this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
-                },
-                goToSlide(index) {
-                    this.activeSlide = index;
-                }
-            }" @mouseenter="stopAutoSlide()" @mouseleave="startAutoSlide()">
-                <div class="relative mx-auto max-w-md lg:max-w-none">
-                    <!-- Carousel Container -->
-                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-700/70 bg-slate-900 group">
-                        <!-- Slides -->
-                        <div class="relative h-88 sm:h-104 w-full overflow-hidden">
-                            <template x-for="(slide, index) in slides" :key="index">
-                                <div x-show="activeSlide === index"
-                                     x-transition:enter="transition ease-out duration-700"
-                                     x-transition:enter-start="opacity-0 scale-95"
-                                     x-transition:enter-end="opacity-100 scale-100"
-                                     x-transition:leave="transition ease-in duration-300 absolute inset-0"
-                                     x-transition:leave-start="opacity-100 scale-100"
-                                     x-transition:leave-end="opacity-0 scale-105"
-                                     class="absolute inset-0 w-full h-full">
-                                    <img :src="slide.image" 
-                                         :alt="slide.title" 
-                                         class="w-full h-full object-cover">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-                                    
-                                    <!-- Slide Caption -->
-                                    <div class="absolute bottom-0 inset-x-0 p-6 sm:p-7 text-white space-y-2">
-                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm"
-                                              :class="slide.tagColor"
-                                              x-text="slide.tag">
-                                        </span>
-                                        <h3 class="font-extrabold text-lg sm:text-xl text-white leading-snug drop-shadow-md" x-text="slide.title"></h3>
-                                        <p class="text-xs sm:text-sm text-slate-200 line-clamp-2 leading-relaxed" x-text="slide.desc"></p>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
+            <!-- Slide-specific Headline & Description -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-white/10 space-y-1.5 transition-all duration-500">
+                <p class="text-xs uppercase tracking-wider text-amber-400 font-bold" x-text="slides[activeSlide].tag"></p>
+                <h2 class="text-base sm:text-xl font-bold text-white leading-snug" x-text="slides[activeSlide].headline"></h2>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" x-text="slides[activeSlide].subhead"></p>
+            </div>
 
-                        <!-- Prev Button -->
-                        <button type="button" 
-                                @click="prevSlide()" 
-                                aria-label="Previous Slide"
-                                class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/60 hover:bg-slate-900 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 z-20">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-                        </button>
+            <!-- Call to Actions -->
+            <div class="pt-2 flex flex-col sm:flex-row items-center gap-4">
+                <a href="{{ route('spmb') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-extrabold text-sm sm:text-base text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-xl shadow-amber-500/25 transition-all transform hover:-translate-y-0.5">
+                    <span>DAFTAR SPMB 2026 SEKARANG</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+                <a href="{{ route('profil') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all">
+                    <span>Profil & Kurikulum</span>
+                </a>
+            </div>
 
-                        <!-- Next Button -->
-                        <button type="button" 
-                                @click="nextSlide()" 
-                                aria-label="Next Slide"
-                                class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/60 hover:bg-slate-900 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 z-20">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                        </button>
-
-                        <!-- Slide Indicators / Dots -->
-                        <div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/50 backdrop-blur-md border border-white/10">
-                            <template x-for="(slide, index) in slides" :key="index">
-                                <button type="button"
-                                        @click="goToSlide(index)"
-                                        :aria-label="'Slide ' + (index + 1)"
-                                        class="h-2 rounded-full transition-all duration-300"
-                                        :class="activeSlide === index ? 'w-6 bg-amber-400' : 'w-2 bg-white/40 hover:bg-white/80'">
-                                </button>
-                            </template>
-                        </div>
-                    </div>
-
-                    <!-- Floating Badge -->
-                    <div class="absolute -bottom-6 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md text-slate-800 p-4 rounded-2xl shadow-2xl border border-slate-200 hidden sm:flex items-center gap-3 z-30">
-                        <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-900">Kurikulum Berbasis Industri</p>
-                            <p class="text-[11px] text-slate-500">Hospitality, Tour & MICE Internasional</p>
-                        </div>
-                    </div>
+            <!-- Quick Highlight Badges -->
+            <div class="pt-6 border-t border-white/15 grid grid-cols-3 gap-4 text-left">
+                <div>
+                    <div class="text-lg sm:text-2xl font-extrabold text-white">S1 (Sarjana)</div>
+                    <div class="text-[11px] sm:text-xs text-slate-300 mt-0.5">Gelar S.Par (144 SKS)</div>
+                </div>
+                <div>
+                    <div class="text-lg sm:text-2xl font-extrabold text-amber-400">Padang</div>
+                    <div class="text-[11px] sm:text-xs text-slate-300 mt-0.5">Jl. Sawahan No. 103</div>
+                </div>
+                <div>
+                    <div class="text-lg sm:text-2xl font-extrabold text-sky-400">SPMB 2026</div>
+                    <div class="text-[11px] sm:text-xs text-slate-300 mt-0.5">Pendaftaran Dibuka</div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- PREV & NEXT CONTROLS (PROFESSIONAL FLOATING ARROWS) -->
+    <button type="button" 
+            @click="prevSlide()" 
+            aria-label="Previous Slide"
+            class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-950/60 hover:bg-amber-500 hover:text-slate-950 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all z-20 shadow-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button type="button" 
+            @click="nextSlide()" 
+            aria-label="Next Slide"
+            class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-950/60 hover:bg-amber-500 hover:text-slate-950 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all z-20 shadow-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    <!-- BOTTOM SLIDE PROGRESS / DOT INDICATORS -->
+    <div class="absolute bottom-6 inset-x-0 z-20 flex items-center justify-center gap-2">
+        <template x-for="(slide, index) in slides" :key="index">
+            <button type="button"
+                    @click="goToSlide(index)"
+                    :aria-label="'Slide ' + (index + 1)"
+                    class="h-2 rounded-full transition-all duration-500"
+                    :class="activeSlide === index ? 'w-8 bg-amber-400 shadow-md shadow-amber-400/50' : 'w-2.5 bg-white/40 hover:bg-white/80'">
+            </button>
+        </template>
     </div>
 </section>
 
