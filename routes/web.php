@@ -54,6 +54,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Banner & Logo
     Route::get('/banner-logo', [BannerLogoController::class, 'index'])->name('banner-logo');
     Route::put('/banner-logo/slide/{slide}', [BannerLogoController::class, 'updateSlide'])->name('banner-logo.slide');
+    Route::post('/banner-logo/logo', [BannerLogoController::class, 'updateLogo'])->name('banner-logo.logo');
     Route::put('/banner-logo/theme', [BannerLogoController::class, 'updateTheme'])->name('banner-logo.theme');
 
     // Profil CRUD

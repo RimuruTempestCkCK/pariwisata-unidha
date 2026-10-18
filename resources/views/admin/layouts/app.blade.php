@@ -16,6 +16,9 @@
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     @endif
 
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
     <!-- SweetAlert2 for Toast & Action Notifications -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

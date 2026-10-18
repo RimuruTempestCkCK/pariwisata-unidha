@@ -13,8 +13,9 @@ class BannerLogoController extends Controller
     {
         $slides = HeroSlide::orderBy('order')->get();
         $headerTheme = Setting::get('header_theme', 'Midnight Blue');
+        $siteLogo = Setting::get('site_logo', null);
 
-        return view('admin.pages.banner-logo', compact('slides', 'headerTheme'));
+        return view('admin.pages.banner-logo', compact('slides', 'headerTheme', 'siteLogo'));
     }
 
     public function updateSlide(Request $request, HeroSlide $slide)
@@ -36,6 +37,23 @@ class BannerLogoController extends Controller
         $slide->update($validated);
 
         return redirect()->route('admin.banner-logo')->with('success', 'Slide banner berhasil diperbarui!');
+    }
+
+    public function updateLogo(Request $request)
+    {
+        $request->validate([
+            'logo_file' => 'nullable|image|max:2048',
+            'logo_url' => 'nullable|string',
+        ]);
+
+        if ($request->hasFile('logo_file')) {
+            $path = $request->file('logo_file')->store('branding', 'public');
+            Setting::set('site_logo', '/storage/' . $path, 'branding');
+        } elseif ($request->filled('logo_url')) {
+            Setting::set('site_logo', $request->input('logo_url'), 'branding');
+        }
+
+        return redirect()->route('admin.banner-logo')->with('success', 'Logo website berhasil diperbarui!');
     }
 
     public function updateTheme(Request $request)
