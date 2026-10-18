@@ -119,27 +119,63 @@
                     </div>
                 </div>
 
-                <!-- Input Ubah Banner Hero -->
-                <div class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Unggah Gambar Banner Baru</label>
-                            <input type="file" accept="image/*" onchange="alert('Berkas banner baru dipilih (Simulasi Mockup)')" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100 cursor-pointer border border-slate-200 rounded-xl p-1">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Atau Gunakan Tautan URL Gambar</label>
-                            <input type="url" value="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                <div class="space-y-4" x-data="{
+                    activeAdminSlide: 0,
+                    adminSlides: [
+                        { id: 1, title: 'Membangun Masa Depan Pariwisata Indonesia', tag: 'Kampus Unggulan', url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80', desc: 'Menghubungkan potensi pariwisata daerah Minangkabau dengan standar industri global.' },
+                        { id: 2, title: 'Manajemen Perhotelan & Event Internasional', tag: 'Hospitality & MICE', url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80', desc: 'Praktik industri perhotelan bintang lima, MICE, dan perencanaan acara profesional.' },
+                        { id: 3, title: 'Eksplorasi Destinasi & Sustainable Tourism', tag: 'Tour & Travel', url: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=80', desc: 'Mengembangkan ekowisata berkelanjutan dan kepemanduan wisata bertaraf dunia.' },
+                        { id: 4, title: 'Beasiswa & Jalur Prestasi Pariwisata', tag: 'SPMB 2026', url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80', desc: 'Raih gelar Sarjana Pariwisata (S.Par.) bersama pengajar berkompeten dan jaringan alumni luas.' }
+                    ]
+                }">
+                    <!-- Slider Item Selector Pills -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-2">Pilih Slide Banner yang Ingin Diatur:</label>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="(s, idx) in adminSlides" :key="s.id">
+                                <button type="button" 
+                                        @click="activeAdminSlide = idx" 
+                                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border"
+                                        :class="activeAdminSlide === idx ? 'bg-blue-900 border-blue-900 text-white shadow-xs' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'">
+                                    <span x-text="'Slide ' + (idx + 1) + ': ' + s.tag"></span>
+                                </button>
+                            </template>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Judul Teks Caption Banner</label>
-                            <input type="text" value="Membangun Masa Depan Pariwisata Indonesia" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                    <!-- Selected Slide Form -->
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Unggah Berkas Gambar Baru</label>
+                                <input type="file" accept="image/*" onchange="notifySuccess('Berkas gambar banner baru dipilih!')" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-100 file:text-blue-900 hover:file:bg-blue-200 cursor-pointer border border-slate-200 rounded-xl p-1 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Atau Gunakan Tautan URL Gambar</label>
+                                <input type="url" x-model="adminSlides[activeAdminSlide].url" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white">
+                            </div>
                         </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Judul Slide Banner</label>
+                                <input type="text" x-model="adminSlides[activeAdminSlide].title" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Badge Tag / Kategori</label>
+                                <input type="text" x-model="adminSlides[activeAdminSlide].tag" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white">
+                            </div>
+                        </div>
+
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Label Tag Banner</label>
-                            <input type="text" value="Kampus Unggulan" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat Banner</label>
+                            <input type="text" x-model="adminSlides[activeAdminSlide].desc" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white">
+                        </div>
+
+                        <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
+                            <button type="button" @click="notifySuccess('Perubahan Slide ' + (activeAdminSlide + 1) + ' berhasil disimpan!')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs">
+                                Perbarui Slide Ini
+                            </button>
                         </div>
                     </div>
                 </div>

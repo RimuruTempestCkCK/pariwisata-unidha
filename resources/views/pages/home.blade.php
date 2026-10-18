@@ -62,31 +62,130 @@
                 </div>
             </div>
 
-            <!-- Right Visual Card -->
-            <div class="lg:col-span-5 relative">
+            <!-- Right Visual Slider Card -->
+            <div class="lg:col-span-5 relative" x-data="{
+                activeSlide: 0,
+                slides: [
+                    {
+                        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
+                        tag: 'Kampus Unggulan',
+                        tagColor: 'bg-amber-400 text-slate-950',
+                        title: 'Membangun Masa Depan Pariwisata Indonesia',
+                        desc: 'Menghubungkan potensi pariwisata daerah Minangkabau dengan standar industri global.'
+                    },
+                    {
+                        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80',
+                        tag: 'Hospitality & MICE',
+                        tagColor: 'bg-sky-400 text-slate-950',
+                        title: 'Manajemen Perhotelan & Event Internasional',
+                        desc: 'Praktik industri perhotelan bintang lima, MICE, dan perencanaan acara profesional.'
+                    },
+                    {
+                        image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=80',
+                        tag: 'Tour & Travel',
+                        tagColor: 'bg-emerald-400 text-slate-950',
+                        title: 'Eksplorasi Destinasi & Sustainable Tourism',
+                        desc: 'Mengembangkan ekowisata berkelanjutan dan kepemanduan wisata bertaraf dunia.'
+                    },
+                    {
+                        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80',
+                        tag: 'SPMB 2026',
+                        tagColor: 'bg-rose-400 text-slate-950',
+                        title: 'Beasiswa & Jalur Prestasi Pariwisata',
+                        desc: 'Raih gelar Sarjana Pariwisata (S.Par.) bersama pengajar berkompeten dan jaringan alumni luas.'
+                    }
+                ],
+                timer: null,
+                init() {
+                    this.startAutoSlide();
+                },
+                startAutoSlide() {
+                    this.timer = setInterval(() => {
+                        this.nextSlide();
+                    }, 5000);
+                },
+                stopAutoSlide() {
+                    if (this.timer) clearInterval(this.timer);
+                },
+                nextSlide() {
+                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                },
+                prevSlide() {
+                    this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
+                },
+                goToSlide(index) {
+                    this.activeSlide = index;
+                }
+            }" @mouseenter="stopAutoSlide()" @mouseleave="startAutoSlide()">
                 <div class="relative mx-auto max-w-md lg:max-w-none">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700/60 bg-slate-800/40">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" 
-                             alt="Destinasi & Pariwisata Indonesia" 
-                             class="w-full h-80 sm:h-96 object-cover transform hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                        <div class="absolute bottom-0 inset-x-0 p-6 text-white space-y-1.5">
-                            <span class="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider bg-amber-500 text-slate-950">
-                                Kampus Unggulan
-                            </span>
-                            <h3 class="font-bold text-lg text-white">Membangun Masa Depan Pariwisata Indonesia</h3>
-                            <p class="text-xs text-slate-300">Menghubungkan potensi pariwisata daerah Minangkabau dengan standar industri global.</p>
+                    <!-- Carousel Container -->
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-700/70 bg-slate-900 group">
+                        <!-- Slides -->
+                        <div class="relative h-88 sm:h-104 w-full overflow-hidden">
+                            <template x-for="(slide, index) in slides" :key="index">
+                                <div x-show="activeSlide === index"
+                                     x-transition:enter="transition ease-out duration-700"
+                                     x-transition:enter-start="opacity-0 scale-95"
+                                     x-transition:enter-end="opacity-100 scale-100"
+                                     x-transition:leave="transition ease-in duration-300 absolute inset-0"
+                                     x-transition:leave-start="opacity-100 scale-100"
+                                     x-transition:leave-end="opacity-0 scale-105"
+                                     class="absolute inset-0 w-full h-full">
+                                    <img :src="slide.image" 
+                                         :alt="slide.title" 
+                                         class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                                    
+                                    <!-- Slide Caption -->
+                                    <div class="absolute bottom-0 inset-x-0 p-6 sm:p-7 text-white space-y-2">
+                                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm"
+                                              :class="slide.tagColor"
+                                              x-text="slide.tag">
+                                        </span>
+                                        <h3 class="font-extrabold text-lg sm:text-xl text-white leading-snug drop-shadow-md" x-text="slide.title"></h3>
+                                        <p class="text-xs sm:text-sm text-slate-200 line-clamp-2 leading-relaxed" x-text="slide.desc"></p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Prev Button -->
+                        <button type="button" 
+                                @click="prevSlide()" 
+                                aria-label="Previous Slide"
+                                class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/60 hover:bg-slate-900 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 z-20">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+
+                        <!-- Next Button -->
+                        <button type="button" 
+                                @click="nextSlide()" 
+                                aria-label="Next Slide"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/60 hover:bg-slate-900 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 z-20">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+
+                        <!-- Slide Indicators / Dots -->
+                        <div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/50 backdrop-blur-md border border-white/10">
+                            <template x-for="(slide, index) in slides" :key="index">
+                                <button type="button"
+                                        @click="goToSlide(index)"
+                                        :aria-label="'Slide ' + (index + 1)"
+                                        class="h-2 rounded-full transition-all duration-300"
+                                        :class="activeSlide === index ? 'w-6 bg-amber-400' : 'w-2 bg-white/40 hover:bg-white/80'">
+                                </button>
+                            </template>
                         </div>
                     </div>
 
                     <!-- Floating Badge -->
-                    <div class="absolute -bottom-6 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md text-slate-800 p-4 rounded-xl shadow-xl border border-slate-200 hidden sm:flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center font-bold">
+                    <div class="absolute -bottom-6 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md text-slate-800 p-4 rounded-2xl shadow-2xl border border-slate-200 hidden sm:flex items-center gap-3 z-30">
+                        <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         </div>
                         <div>
                             <p class="text-xs font-bold text-slate-900">Kurikulum Berbasis Industri</p>
-                            <p class="text-[11px] text-slate-500">Hospitality & Manajemen Destinasi</p>
+                            <p class="text-[11px] text-slate-500">Hospitality, Tour & MICE Internasional</p>
                         </div>
                     </div>
                 </div>
