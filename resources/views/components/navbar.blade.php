@@ -36,7 +36,6 @@
                     <span class="block text-base font-extrabold text-slate-900 leading-tight group-hover:text-blue-900 transition-colors">
                         UNIVERSITAS DHARMA ANDALAS
                     </span>
-                    <span class="block text-[11px] text-slate-500 font-medium">Fakultas Ekonomi & Bisnis / UNIDHA Padang</span>
                 </div>
             </a>
 
