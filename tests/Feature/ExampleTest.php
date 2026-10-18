@@ -60,6 +60,7 @@ class ExampleTest extends TestCase
             '/admin/landing',
             '/admin/banner-logo',
             '/admin/profil',
+            '/admin/pimpinan',
             '/admin/kurikulum',
             '/admin/kemahasiswaan',
             '/admin/link',
@@ -80,31 +81,32 @@ class ExampleTest extends TestCase
         $this->seed(DatabaseSeeder::class);
         $user = \App\Models\User::first();
 
-        // 1. Update existing leadership item (Kaprodi)
+        // 1. Update existing leadership item via dedicated Pimpinan route with custom photo URL
         $kaprodi = \App\Models\ProfileItem::where('kategori', 'Tata Kelola & Pimpinan')
             ->where('label', 'Ketua Program Studi')
             ->first();
 
-        $updateResponse = $this->actingAs($user)->put("/admin/profil/{$kaprodi->id}", [
-            'kategori' => 'Tata Kelola & Pimpinan',
+        $updateResponse = $this->actingAs($user)->put("/admin/pimpinan/{$kaprodi->id}", [
             'label' => 'Ketua Program Studi',
             'isi' => 'Eka Mariyanti, S.E., M.M., M.Par., Ph.D. (Updated)',
             'keterangan' => 'Wisudawati Terbaik Magister Pariwisata',
+            'foto_url' => 'https://images.unsplash.com/photo-custom-portrait',
         ]);
-        $updateResponse->assertRedirect('/admin/profil');
+        $updateResponse->assertRedirect('/admin/pimpinan');
 
         // Check in public profil page
         $publicProfil = $this->get('/profil');
         $publicProfil->assertStatus(200);
         $publicProfil->assertSee('Eka Mariyanti, S.E., M.M., M.Par., Ph.D. (Updated)');
+        $publicProfil->assertSee('https://images.unsplash.com/photo-custom-portrait');
 
-        // 2. Update leadership section header via settings
-        $settingsResponse = $this->actingAs($user)->post('/admin/pengaturan', [
+        // 2. Update leadership section header via dedicated pimpinan.header route
+        $settingsResponse = $this->actingAs($user)->post('/admin/pimpinan/header', [
             'pimpinan_eyebrow' => 'Tata Kelola Baru',
             'pimpinan_title' => 'Pimpinan & Pengajar Resmi',
             'pimpinan_desc' => 'Deskripsi pimpinan yang telah diubah.',
         ]);
-        $settingsResponse->assertRedirect('/admin/pengaturan');
+        $settingsResponse->assertRedirect('/admin/pimpinan');
 
         $publicProfilAfterSetting = $this->get('/profil');
         $publicProfilAfterSetting->assertStatus(200);

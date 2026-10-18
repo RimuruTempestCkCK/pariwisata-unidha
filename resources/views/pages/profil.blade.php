@@ -105,7 +105,7 @@
     </section>
 
     <!-- Pengelola Program Studi / Pimpinan Akademik -->
-    <section class="space-y-6">
+    <section id="tata-kelola" class="space-y-8 scroll-mt-24">
         <div class="text-center max-w-2xl mx-auto space-y-2">
             <span class="text-xs font-bold text-blue-900 tracking-wider uppercase block">
                 {{ \App\Models\Setting::get('pimpinan_eyebrow', 'Tata Kelola & Pengajar') }}
@@ -120,32 +120,33 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse($pimpinanItems as $pimpinan)
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 text-center space-y-3 hover:shadow-lg transition-all duration-300">
-                    <div class="w-20 h-20 rounded-full bg-slate-100 mx-auto flex items-center justify-center text-slate-500 font-bold text-xl border-2 border-amber-400">
-                        <svg class="w-10 h-10 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <div class="bg-white rounded-3xl p-6 border border-slate-200/90 text-center space-y-4 hover:shadow-xl hover:border-amber-400/50 transition-all duration-300 group">
+                    <div class="relative w-28 h-28 mx-auto">
+                        @if($pimpinan->foto)
+                            <img src="{{ $pimpinan->foto }}" alt="{{ $pimpinan->isi }}" class="w-28 h-28 rounded-full object-cover border-4 border-amber-400/80 shadow-md group-hover:scale-105 transition-transform duration-300">
+                        @else
+                            <div class="w-28 h-28 rounded-full bg-slate-100 mx-auto flex items-center justify-center text-slate-400 font-bold text-xl border-4 border-amber-400/80 shadow-md">
+                                <svg class="w-14 h-14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
+                        @endif
+                        <span class="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white" title="Aktif"></span>
                     </div>
-                    <div>
-                        <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-900 mb-2">
+                    
+                    <div class="space-y-1.5">
+                        <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-900 border border-blue-200">
                             {{ $pimpinan->label }}
                         </span>
                         @if($pimpinan->keterangan)
-                            <p class="text-xs text-amber-600 font-semibold mb-1">{{ $pimpinan->keterangan }}</p>
+                            <p class="text-xs text-amber-600 font-semibold">{{ $pimpinan->keterangan }}</p>
                         @endif
-                        <h3 class="font-extrabold text-slate-900 text-base leading-snug">{{ $pimpinan->isi }}</h3>
+                        <h3 class="font-extrabold text-slate-900 text-base leading-snug group-hover:text-blue-900 transition-colors">
+                            {{ $pimpinan->isi }}
+                        </h3>
                     </div>
                 </div>
             @empty
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 text-center space-y-3">
-                    <div class="w-20 h-20 rounded-full bg-slate-100 mx-auto flex items-center justify-center text-slate-500 font-bold text-xl border-2 border-amber-400">
-                        <svg class="w-10 h-10 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    </div>
-                    <div>
-                        <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-900 mb-2">
-                            Ketua Program Studi
-                        </span>
-                        <p class="text-xs text-amber-600 font-semibold mb-1">Wisudawati Terbaik Magister Pariwisata</p>
-                        <h3 class="font-extrabold text-slate-900 text-base leading-snug">Eka Mariyanti, S.E., M.M., M.Par., Ph.D.</h3>
-                    </div>
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 text-center space-y-3 sm:col-span-3">
+                    <p class="text-slate-400 text-xs">Belum ada data pimpinan.</p>
                 </div>
             @endforelse
         </div>

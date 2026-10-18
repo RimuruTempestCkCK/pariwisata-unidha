@@ -11,6 +11,7 @@ class ProfileItem extends Model
         'label',
         'isi',
         'keterangan',
+        'foto',
         'order',
     ];
 

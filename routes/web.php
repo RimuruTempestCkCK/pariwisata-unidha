@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CurriculumController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LinkController;
 use App\Http\Controllers\Admin\KemahasiswaanController;
+use App\Http\Controllers\Admin\PimpinanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('/profil', [ProfilController::class, 'store'])->name('profil.store');
     Route::put('/profil/{profil}', [ProfilController::class, 'update'])->name('profil.update');
     Route::delete('/profil/{profil}', [ProfilController::class, 'destroy'])->name('profil.destroy');
+
+    // Tata Kelola & Pimpinan CRUD
+    Route::get('/pimpinan', [PimpinanController::class, 'index'])->name('pimpinan');
+    Route::post('/pimpinan/header', [PimpinanController::class, 'updateHeader'])->name('pimpinan.header');
+    Route::post('/pimpinan', [PimpinanController::class, 'store'])->name('pimpinan.store');
+    Route::put('/pimpinan/{pimpinan}', [PimpinanController::class, 'update'])->name('pimpinan.update');
+    Route::delete('/pimpinan/{pimpinan}', [PimpinanController::class, 'destroy'])->name('pimpinan.destroy');
 
     // Kurikulum CRUD
     Route::get('/kurikulum', [CurriculumController::class, 'index'])->name('kurikulum');

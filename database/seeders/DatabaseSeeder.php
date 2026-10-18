@@ -201,9 +201,9 @@ class DatabaseSeeder extends Seeder
             ['kategori' => 'Misi Program Studi', 'label' => 'Misi 2: Penelitian & Publikasi', 'isi' => 'Mengembangkan penelitian inovatif di bidang ekowisata, kearifan lokal Minangkabau, dan transformasi digital pariwisata yang bereputasi nasional dan internasional.', 'keterangan' => 'Pilar Tri Dharma', 'order' => 7],
             ['kategori' => 'Misi Program Studi', 'label' => 'Misi 3: Pengabdian Masyarakat', 'isi' => 'Melaksanakan pengabdian kepada masyarakat melalui pendampingan kelompok sadar wisata (Pokdarwis) dan pemberdayaan desa wisata berkelanjutan.', 'keterangan' => 'Pilar Tri Dharma', 'order' => 8],
             ['kategori' => 'Misi Program Studi', 'label' => 'Misi 4: Kerjasama Industri', 'isi' => 'Memperluas kemitraan strategis dengan industri perhotelan, biro perjalanan, asosiasi profesi, dan dinas pariwisata di dalam maupun luar negeri.', 'keterangan' => 'Pilar Kerjasama', 'order' => 9],
-            ['kategori' => 'Tata Kelola & Pimpinan', 'label' => 'Ketua Program Studi', 'isi' => 'Eka Mariyanti, S.E., M.M., M.Par., Ph.D.', 'keterangan' => 'Wisudawati Terbaik Magister Pariwisata', 'order' => 10],
-            ['kategori' => 'Tata Kelola & Pimpinan', 'label' => 'Dekan Fakultas Ekonomi & Bisnis', 'isi' => 'Heru Aulia Azman, S.Sos., M.M., Ph.D.', 'keterangan' => 'Pimpinan Fakultas', 'order' => 11],
-            ['kategori' => 'Tata Kelola & Pimpinan', 'label' => 'Rektor Universitas Dharma Andalas', 'isi' => 'Prof. Dr. Novesar Jamarun, MS', 'keterangan' => 'Pimpinan Universitas', 'order' => 12],
+            ['kategori' => 'Tata Kelola & Pimpinan', 'label' => 'Ketua Program Studi', 'isi' => 'Eka Mariyanti, S.E., M.M., M.Par., Ph.D.', 'keterangan' => 'Wisudawati Terbaik Magister Pariwisata', 'foto' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80', 'order' => 10],
+            ['kategori' => 'Tata Kelola & Pimpinan', 'label' => 'Dekan Fakultas Ekonomi & Bisnis', 'isi' => 'Heru Aulia Azman, S.Sos., M.M., Ph.D.', 'keterangan' => 'Pimpinan Fakultas', 'foto' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'order' => 11],
+            ['kategori' => 'Tata Kelola & Pimpinan', 'label' => 'Rektor Universitas Dharma Andalas', 'isi' => 'Prof. Dr. Novesar Jamarun, MS', 'keterangan' => 'Pimpinan Universitas', 'foto' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', 'order' => 12],
         ];
 
         foreach ($profileData as $item) {
