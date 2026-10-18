@@ -48,10 +48,10 @@
             </div>
         @endforeach
 
-        <!-- Multi-layer Dark Gradient Overlay for Maximum Typography Clarity -->
-        <div class="absolute inset-0 bg-slate-950/75 z-2 pointer-events-none"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-2 pointer-events-none"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40 z-2 pointer-events-none"></div>
+        <!-- Softened Contrast Overlay for Clearer Background Image & Legible Typography -->
+        <div class="absolute inset-0 bg-slate-950/45 z-2 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent z-2 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20 z-2 pointer-events-none"></div>
     </div>
 
     <!-- HERO CONTENT CONTAINER -->
