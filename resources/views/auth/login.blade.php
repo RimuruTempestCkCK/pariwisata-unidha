@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-slate-50">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-slate-950">
 <head>
     <meta charset="utf-8">
     @php
@@ -26,25 +26,28 @@
     @endif
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        html, body {
+            background-color: #020617;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
     </style>
 </head>
-<body class="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 text-slate-800 antialiased relative overflow-x-hidden">
+<body class="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-slate-800 antialiased relative overflow-x-hidden selection:bg-amber-500 selection:text-white">
     <!-- Ambient Blur Glows -->
-    <div class="absolute -top-32 -left-32 w-72 sm:w-80 h-72 sm:h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-32 w-72 sm:w-80 h-72 sm:h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="fixed -top-32 -left-32 w-72 sm:w-96 h-72 sm:h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="fixed -bottom-32 -right-32 w-72 sm:w-96 h-72 sm:h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="w-full max-w-md relative z-10 my-auto py-6 sm:py-8">
+    <div class="w-full max-w-md relative z-10 my-auto py-8">
         <!-- Logo & Brand Header -->
         <div class="text-center mb-6 sm:mb-8 space-y-2">
             <a href="{{ route('home') }}" class="inline-flex items-center gap-2.5 sm:gap-3 group">
-                <x-app-logo class="w-10 h-10 sm:w-12 sm:h-12 shrink-0" svg-class="w-6 h-6 sm:w-7 sm:h-7" />
+                <x-app-logo class="w-11 h-11 sm:w-12 sm:h-12 shrink-0" svg-class="w-6 h-6 sm:w-7 sm:h-7" />
                 <div class="text-left">
                     <span class="block text-[10px] sm:text-xs font-bold tracking-wider uppercase text-amber-400">PORTAL CMS ADMIN</span>
                     <span class="block text-sm sm:text-base font-extrabold text-white leading-tight">S1 PARIWISATA UNIDHA</span>
                 </div>
             </a>
-            <p class="text-[11px] sm:text-xs text-slate-400 px-2">Masuk untuk mengelola publikasi warta, agenda, dan informasi prodi.</p>
+            <p class="text-[11px] sm:text-xs text-slate-400 px-4">Masuk untuk mengelola warta, data prodi, dan pengaturan website.</p>
         </div>
 
         <!-- Login Card -->
