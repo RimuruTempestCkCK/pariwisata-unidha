@@ -29,29 +29,29 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="h-full flex items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 text-slate-800">
+<body class="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-8 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 text-slate-800 antialiased relative overflow-x-hidden">
     <!-- Ambient Blur Glows -->
-    <div class="absolute -top-32 -left-32 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-32 -left-32 w-72 sm:w-80 h-72 sm:h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-72 sm:w-80 h-72 sm:h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="w-full max-w-md relative z-10">
+    <div class="w-full max-w-md relative z-10 my-auto py-6 sm:py-8">
         <!-- Logo & Brand Header -->
-        <div class="text-center mb-8 space-y-2">
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-3 group">
-                <x-app-logo class="w-12 h-12" svg-class="w-7 h-7" />
+        <div class="text-center mb-6 sm:mb-8 space-y-2">
+            <a href="{{ route('home') }}" class="inline-flex items-center gap-2.5 sm:gap-3 group">
+                <x-app-logo class="w-10 h-10 sm:w-12 sm:h-12 shrink-0" svg-class="w-6 h-6 sm:w-7 sm:h-7" />
                 <div class="text-left">
-                    <span class="block text-xs font-bold tracking-wider uppercase text-amber-400">PORTAL CMS ADMIN</span>
-                    <span class="block text-base font-extrabold text-white leading-tight">S1 PARIWISATA UNIDHA</span>
+                    <span class="block text-[10px] sm:text-xs font-bold tracking-wider uppercase text-amber-400">PORTAL CMS ADMIN</span>
+                    <span class="block text-sm sm:text-base font-extrabold text-white leading-tight">S1 PARIWISATA UNIDHA</span>
                 </div>
             </a>
-            <p class="text-xs text-slate-400">Masuk untuk mengelola publikasi warta, agenda, dan informasi prodi.</p>
+            <p class="text-[11px] sm:text-xs text-slate-400 px-2">Masuk untuk mengelola publikasi warta, agenda, dan informasi prodi.</p>
         </div>
 
         <!-- Login Card -->
-        <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-8 sm:p-10 shadow-2xl border border-white/20 space-y-6">
+        <div class="bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl border border-white/20 space-y-5 sm:space-y-6">
             <div class="space-y-1">
-                <h1 class="text-xl font-extrabold text-slate-900">Selamat Datang Pengelola</h1>
-                <p class="text-xs text-slate-500">Masukkan kredensial akun administrator Anda.</p>
+                <h1 class="text-lg sm:text-xl font-extrabold text-slate-900">Selamat Datang Pengelola</h1>
+                <p class="text-[11px] sm:text-xs text-slate-500">Masukkan kredensial akun administrator Anda.</p>
             </div>
 
             @if ($errors->any())
