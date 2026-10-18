@@ -13,21 +13,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-800/80">
             <!-- Col 1: Brand & Bio -->
-            @php
-                $siteLogo = \App\Models\Setting::get('site_logo', null);
-            @endphp
             <div class="lg:col-span-4 space-y-4">
                 <div class="inline-block bg-white p-3 rounded-2xl shadow-xl">
                     <div class="flex items-center gap-3">
-                        @if($siteLogo)
-                            <img src="{{ $siteLogo }}" alt="Logo S1 Pariwisata UNIDHA" class="w-10 h-10 object-contain">
-                        @else
-                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-900 via-blue-800 to-amber-600 flex items-center justify-center text-white font-bold">
-                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582" />
-                                </svg>
-                            </div>
-                        @endif
+                        <x-app-logo class="w-10 h-10" svg-class="w-6 h-6" />
                         <div>
                             <span class="block text-[11px] font-bold text-amber-600 uppercase tracking-wider">S1 PARIWISATA</span>
                             <strong class="block text-xs font-extrabold text-slate-900 leading-tight">UNIVERSITAS DHARMA ANDALAS</strong>

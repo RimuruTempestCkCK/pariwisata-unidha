@@ -82,19 +82,8 @@
     <!-- Sidebar Desktop -->
     <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 border-r border-slate-800 text-slate-300 shrink-0">
         <!-- Logo Area -->
-        @php
-            $siteLogo = \App\Models\Setting::get('site_logo', null);
-        @endphp
         <div class="h-16 flex items-center gap-3 px-6 border-b border-slate-800">
-            @if($siteLogo)
-                <img src="{{ $siteLogo }}" alt="Logo CMS" class="w-8 h-8 object-contain rounded-lg">
-            @else
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-amber-500 flex items-center justify-center text-white font-bold shadow">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582" />
-                    </svg>
-                </div>
-            @endif
+            <x-app-logo class="w-8 h-8" svg-class="w-5 h-5" />
             <div>
                 <span class="block text-xs font-bold uppercase tracking-wider text-amber-400">CMS PANEL</span>
                 <span class="block text-sm font-extrabold text-white leading-none">S1 Pariwisata</span>

@@ -42,15 +42,7 @@
                 <div class="space-y-3">
                     <label class="block text-xs font-bold text-slate-700">Pratinjau Logo Saat Ini</label>
                     <div id="logo-preview-box" class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-                        @if($siteLogo)
-                            <img src="{{ $siteLogo }}" alt="Logo Website" class="w-12 h-12 object-contain rounded-xl shadow-xs">
-                        @else
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-900 via-blue-800 to-amber-600 flex items-center justify-center text-white shadow-md shrink-0">
-                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582" />
-                                </svg>
-                            </div>
-                        @endif
+                        <x-app-logo class="w-12 h-12" svg-class="w-7 h-7" />
                         <div>
                             <span class="block text-[11px] font-bold tracking-wider uppercase text-amber-600">S1 PARIWISATA</span>
                             <span class="block text-xs font-extrabold text-slate-900 leading-tight">UNIVERSITAS DHARMA ANDALAS</span>
