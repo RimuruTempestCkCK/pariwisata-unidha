@@ -1,0 +1,121 @@
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Brand Identity -->
+            <a href="{{ route('home') }}" class="flex items-center gap-3.5 group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-900 via-blue-800 to-amber-600 flex items-center justify-center text-white shadow-md shadow-blue-900/10 group-hover:scale-105 transition-transform">
+                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-xs font-bold tracking-wider uppercase text-amber-600">S1 PARIWISATA</span>
+                    <span class="block text-base font-extrabold text-slate-900 leading-tight group-hover:text-blue-900 transition-colors">
+                        UNIVERSITAS DHARMA ANDALAS
+                    </span>
+                    <span class="block text-[11px] text-slate-500 font-medium">Fakultas Ekonomi & Bisnis / UNIDHA Padang</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+                <a href="{{ route('home') }}" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors {{ request()->routeIs('home') ? 'text-blue-900 bg-blue-50/80 font-bold' : 'text-slate-700 hover:text-blue-900 hover:bg-slate-100/70' }}">
+                    Beranda
+                </a>
+                <a href="{{ route('profil') }}" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors {{ request()->routeIs('profil') ? 'text-blue-900 bg-blue-50/80 font-bold' : 'text-slate-700 hover:text-blue-900 hover:bg-slate-100/70' }}">
+                    Profil
+                </a>
+                <a href="{{ route('akademik') }}" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors {{ request()->routeIs('akademik') ? 'text-blue-900 bg-blue-50/80 font-bold' : 'text-slate-700 hover:text-blue-900 hover:bg-slate-100/70' }}">
+                    Akademik
+                </a>
+                <a href="{{ route('kemahasiswaan') }}" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors {{ request()->routeIs('kemahasiswaan') ? 'text-blue-900 bg-blue-50/80 font-bold' : 'text-slate-700 hover:text-blue-900 hover:bg-slate-100/70' }}">
+                    Kemahasiswaan
+                </a>
+                <a href="{{ route('berita.index') }}" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors {{ request()->routeIs('berita.*') ? 'text-blue-900 bg-blue-50/80 font-bold' : 'text-slate-700 hover:text-blue-900 hover:bg-slate-100/70' }}">
+                    Berita
+                </a>
+                <a href="{{ route('link') }}" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors {{ request()->routeIs('link') ? 'text-blue-900 bg-blue-50/80 font-bold' : 'text-slate-700 hover:text-blue-900 hover:bg-slate-100/70' }}">
+                    Link
+                </a>
+                <a href="{{ route('kontak') }}" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors {{ request()->routeIs('kontak') ? 'text-blue-900 bg-blue-50/80 font-bold' : 'text-slate-700 hover:text-blue-900 hover:bg-slate-100/70' }}">
+                    Kontak
+                </a>
+            </nav>
+
+            <!-- Action CTA Button -->
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="{{ route('spmb') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-md shadow-amber-500/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                    <span>SPMB 2026</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <div class="flex lg:hidden items-center gap-2">
+                <a href="{{ route('spmb') }}" class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-700 bg-amber-100 border border-amber-200">
+                    SPMB 2026
+                </a>
+                <button type="button" id="mobile-menu-btn" class="p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500" aria-label="Buka menu navigasi" aria-expanded="false">
+                    <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 shadow-xl transition-all">
+        <nav class="flex flex-col space-y-1">
+            <a href="{{ route('home') }}" class="px-4 py-2.5 rounded-lg text-sm font-semibold {{ request()->routeIs('home') ? 'bg-blue-50 text-blue-900 font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                Beranda
+            </a>
+            <a href="{{ route('profil') }}" class="px-4 py-2.5 rounded-lg text-sm font-semibold {{ request()->routeIs('profil') ? 'bg-blue-50 text-blue-900 font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                Profil Program Studi
+            </a>
+            <a href="{{ route('akademik') }}" class="px-4 py-2.5 rounded-lg text-sm font-semibold {{ request()->routeIs('akademik') ? 'bg-blue-50 text-blue-900 font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                Akademik & Kurikulum
+            </a>
+            <a href="{{ route('kemahasiswaan') }}" class="px-4 py-2.5 rounded-lg text-sm font-semibold {{ request()->routeIs('kemahasiswaan') ? 'bg-blue-50 text-blue-900 font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                Kemahasiswaan & Himpunan
+            </a>
+            <a href="{{ route('berita.index') }}" class="px-4 py-2.5 rounded-lg text-sm font-semibold {{ request()->routeIs('berita.*') ? 'bg-blue-50 text-blue-900 font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                Berita & Artikel
+            </a>
+            <a href="{{ route('link') }}" class="px-4 py-2.5 rounded-lg text-sm font-semibold {{ request()->routeIs('link') ? 'bg-blue-50 text-blue-900 font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                Tautan Eksternal & Informasi
+            </a>
+            <a href="{{ route('kontak') }}" class="px-4 py-2.5 rounded-lg text-sm font-semibold {{ request()->routeIs('kontak') ? 'bg-blue-50 text-blue-900 font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                Hubungi Kami
+            </a>
+            <div class="pt-3">
+                <a href="{{ route('spmb') }}" class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-amber-500 to-amber-600 shadow-md">
+                    <span>Informasi SPMB 2026</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        if (btn && menu) {
+            btn.addEventListener('click', function() {
+                const isOpen = !menu.classList.contains('hidden');
+                menu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('hidden', !isOpen);
+                closeIcon.classList.toggle('hidden', isOpen);
+                btn.setAttribute('aria-expanded', !isOpen);
+            });
+        }
+    });
+</script>
