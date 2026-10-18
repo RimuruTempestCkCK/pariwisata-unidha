@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', $news->title . ' - S1 Pariwisata UNIDHA')
+@section('title', $news->title)
 @section('meta_description', $news->summary)
 
 @section('content')

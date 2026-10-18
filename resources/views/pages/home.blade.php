@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Beranda - Let\'s Go to Join With Us')
+@section('title', 'Beranda')
 @section('meta_description', 'Program Studi S1 Pariwisata Universitas Dharma Andalas Padang. Slogan: Creating Memories, Inspiring Journey, And Connecting Cultures, Creating Futures.')
 
 @section('content')

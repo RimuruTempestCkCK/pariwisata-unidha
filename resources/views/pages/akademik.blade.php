@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Akademik & Kurikulum - S1 Pariwisata UNIDHA')
+@section('title', 'Akademik & Kurikulum')
 @section('meta_description', 'Informasi akademik, kurikulum, sistem perkuliahan, dan praktik pembelajaran Program Studi S1 Pariwisata UNIDHA.')
 
 @section('content')

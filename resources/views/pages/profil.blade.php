@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Profil Program Studi S1 Pariwisata')
+@section('title', 'Profil Program Studi')
 @section('meta_description', 'Profil lengkap Program Studi S1 Pariwisata Fakultas Ekonomi dan Bisnis Universitas Dharma Andalas Padang.')
 
 @section('content')

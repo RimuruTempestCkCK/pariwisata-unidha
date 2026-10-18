@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Kontak & Lokasi Kampus - S1 Pariwisata UNIDHA')
+@section('title', 'Kontak & Lokasi Kampus')
 @section('meta_description', 'Kontak resmi, alamat, peta lokasi, media sosial, dan formulir konsultasi Program Studi S1 Pariwisata Universitas Dharma Andalas.')
 
 @section('content')

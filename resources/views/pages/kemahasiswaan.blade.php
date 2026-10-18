@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Kemahasiswaan & HIMPAR - S1 Pariwisata UNIDHA')
+@section('title', 'Kemahasiswaan & HIMPAR')
 @section('meta_description', 'Kehidupan kemahasiswaan dan Himpunan Mahasiswa Pariwisata Dharma Andalas (HIMPAR) Universitas Dharma Andalas Padang.')
 
 @section('content')

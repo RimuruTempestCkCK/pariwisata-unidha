@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Tautan & Informasi Eksternal - S1 Pariwisata UNIDHA')
+@section('title', 'Tautan & Direktori')
 @section('meta_description', 'Direktori tautan resmi institusi, portal akademik, jurnal, dan informasi eksternal Universitas Dharma Andalas.')
 
 @section('content')

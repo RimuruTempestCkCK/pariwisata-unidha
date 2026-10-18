@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Penerimaan Mahasiswa Baru SPMB 2026 - S1 Pariwisata UNIDHA')
+@section('title', 'Penerimaan Mahasiswa Baru SPMB 2026')
 @section('meta_description', 'Informasi resmi Seleksi Penerimaan Mahasiswa Baru (SPMB) Tahun 2026 Program Studi S1 Pariwisata Universitas Dharma Andalas Padang.')
 
 @section('content')

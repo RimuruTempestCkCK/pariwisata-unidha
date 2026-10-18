@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Berita & Informasi - S1 Pariwisata UNIDHA')
+@section('title', 'Berita & Informasi')
 @section('meta_description', 'Kumpulan berita, warta kegiatan akademik, pengumuman, dan artikel kepariwisataan Program Studi S1 Pariwisata Universitas Dharma Andalas.')
 
 @section('content')
