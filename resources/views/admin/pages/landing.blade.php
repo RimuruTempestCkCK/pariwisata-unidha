@@ -26,11 +26,12 @@
 
     <!-- Quick Navigation Tabs by Section -->
     <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 text-xs font-bold">
-        <button class="px-4 py-2 rounded-xl bg-blue-900 text-white whitespace-nowrap shadow-xs">Semua Bagian Beranda (10 Butir)</button>
+        <button class="px-4 py-2 rounded-xl bg-blue-900 text-white whitespace-nowrap shadow-xs">Semua Bagian Beranda & Footer (12 Butir)</button>
         <button onclick="alert('Filter Hero Section');" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 whitespace-nowrap">Hero & Slogan</button>
         <button onclick="alert('Filter Institusi UNIDHA');" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 whitespace-nowrap">Pengenalan UNIDHA</button>
         <button onclick="alert('Filter Prospek Karier');" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 whitespace-nowrap">3 Pilar Prospek Karier</button>
         <button onclick="alert('Filter Banner Promosi SPMB');" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 whitespace-nowrap">Promosi SPMB 2026</button>
+        <button onclick="alert('Filter Footer & Kontak');" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 whitespace-nowrap">Footer & Kontak</button>
     </div>
 
     <!-- Modal Form Edit Butir Landing Page (Pop Up Template) -->
@@ -261,6 +262,36 @@
                         <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Aktif</span></td>
                         <td class="px-6 py-4 text-right">
                             <button onclick="openLandingModal('Promosi SPMB', 'Banner Penerimaan SPMB 2026', 'Wujudkan Cita-cita Karier Pariwisata Anda Bersama UNIDHA. Bergabunglah bersama keluarga besar Program Studi S1 Pariwisata Universitas Dharma Andalas...', 'Informasi Pendaftaran SPMB')" class="text-blue-900 hover:text-amber-600 font-bold hover:underline">Sunting</button>
+                        </td>
+                    </tr>
+
+                    <!-- 11. Footer Slogan & About Us -->
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="px-6 py-4 text-center font-bold text-slate-400">11</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-slate-100 text-slate-800">Footer Bawah</span>
+                        </td>
+                        <td class="px-6 py-4 font-bold text-slate-900">Footer Deskripsi & Slogan</td>
+                        <td class="px-6 py-4 text-slate-600 leading-relaxed">Slogan resmi dan narasi komitmen Program Studi S1 Pariwisata UNIDHA mencetak lulusan global.</td>
+                        <td class="px-6 py-4 text-slate-500">Instagram & Email</td>
+                        <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Aktif</span></td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="{{ route('admin.pengaturan') }}" class="text-blue-900 hover:text-amber-600 font-bold hover:underline">Kelola di Footer</a>
+                        </td>
+                    </tr>
+
+                    <!-- 12. Footer Alamat & Kontak Resmi -->
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="px-6 py-4 text-center font-bold text-slate-400">12</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-slate-100 text-slate-800">Footer Bawah</span>
+                        </td>
+                        <td class="px-6 py-4 font-bold text-slate-900">Footer Alamat & Hak Cipta</td>
+                        <td class="px-6 py-4 text-slate-600 leading-relaxed">Jl. Sawahan No.103 Padang, pariwisata@unidha.ac.id, Copyright & Organisasi Mahasiswa HIMPAR.</td>
+                        <td class="px-6 py-4 text-slate-500">Kontak & Medsos</td>
+                        <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Aktif</span></td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="{{ route('admin.pengaturan') }}" class="text-blue-900 hover:text-amber-600 font-bold hover:underline">Kelola di Footer</a>
                         </td>
                     </tr>
                 </tbody>
