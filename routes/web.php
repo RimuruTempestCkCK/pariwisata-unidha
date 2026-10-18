@@ -1,101 +1,76 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Services\NewsDataService;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\LandingController;
+use App\Http\Controllers\Admin\BannerLogoController;
+use App\Http\Controllers\Admin\ProfilController;
+use App\Http\Controllers\Admin\CurriculumController;
+use App\Http\Controllers\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Frontend S1 Pariwisata UNIDHA
+| Web Routes - Frontend & Admin S1 Pariwisata UNIDHA
 |--------------------------------------------------------------------------
 */
 
 // ================= PUBLIC FRONTEND =================
-Route::get('/', function () {
-    $latestNews = NewsDataService::getLatest(3);
-    return view('pages.home', compact('latestNews'));
-})->name('home');
-
-Route::get('/profil', function () {
-    return view('pages.profil');
-})->name('profil');
-
-Route::get('/akademik', function () {
-    return view('pages.akademik');
-})->name('akademik');
-
-Route::get('/kemahasiswaan', function () {
-    return view('pages.kemahasiswaan');
-})->name('kemahasiswaan');
-
-Route::get('/berita', function () {
-    $newsList = NewsDataService::getAll();
-    return view('pages.berita', compact('newsList'));
-})->name('berita.index');
-
-Route::get('/berita/{slug}', function (string $slug) {
-    $news = NewsDataService::findBySlug($slug);
-    
-    if (!$news) {
-        abort(404, 'Berita tidak ditemukan.');
-    }
-
-    $allNews = NewsDataService::getAll();
-    $relatedNews = array_values(array_filter($allNews, fn($item) => $item['slug'] !== $slug));
-    $relatedNews = array_slice($relatedNews, 0, 3);
-
-    return view('pages.detail-berita', compact('news', 'relatedNews'));
-})->name('berita.show');
-
-Route::get('/kontak', function () {
-    return view('pages.kontak');
-})->name('kontak');
-
-Route::get('/link', function () {
-    return view('pages.link');
-})->name('link');
-
-Route::get('/spmb-2026', function () {
-    return view('pages.spmb');
-})->name('spmb');
+Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/profil', [PublicController::class, 'profil'])->name('profil');
+Route::get('/akademik', [PublicController::class, 'akademik'])->name('akademik');
+Route::get('/kemahasiswaan', [PublicController::class, 'kemahasiswaan'])->name('kemahasiswaan');
+Route::get('/berita', [PublicController::class, 'berita'])->name('berita.index');
+Route::get('/berita/{slug}', [PublicController::class, 'detailBerita'])->name('berita.show');
+Route::get('/kontak', [PublicController::class, 'kontak'])->name('kontak');
+Route::get('/link', [PublicController::class, 'link'])->name('link');
+Route::get('/spmb-2026', [PublicController::class, 'spmb'])->name('spmb');
 
 
-// ================= AUTHENTICATION MOCKUP =================
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// ================= AUTHENTICATION =================
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// ================= ADMIN DASHBOARD MOCKUP =================
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        $newsList = NewsDataService::getAll();
-        return view('admin.pages.dashboard', compact('newsList'));
-    })->name('dashboard');
+// ================= ADMIN DASHBOARD (PROTECTED) =================
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/berita', function () {
-        $newsList = NewsDataService::getAll();
-        return view('admin.pages.berita', compact('newsList'));
-    })->name('berita');
+    // Berita CRUD
+    Route::get('/berita', [NewsController::class, 'index'])->name('berita');
+    Route::post('/berita', [NewsController::class, 'store'])->name('berita.store');
+    Route::put('/berita/{news}', [NewsController::class, 'update'])->name('berita.update');
+    Route::delete('/berita/{news}', [NewsController::class, 'destroy'])->name('berita.destroy');
 
-    Route::get('/landing', function () {
-        return view('admin.pages.landing');
-    })->name('landing');
+    // Landing Page CRUD
+    Route::get('/landing', [LandingController::class, 'index'])->name('landing');
+    Route::post('/landing', [LandingController::class, 'store'])->name('landing.store');
+    Route::put('/landing/{element}', [LandingController::class, 'update'])->name('landing.update');
+    Route::delete('/landing/{element}', [LandingController::class, 'destroy'])->name('landing.destroy');
 
-    Route::get('/banner-logo', function () {
-        return view('admin.pages.banner-logo');
-    })->name('banner-logo');
+    // Banner & Logo
+    Route::get('/banner-logo', [BannerLogoController::class, 'index'])->name('banner-logo');
+    Route::put('/banner-logo/slide/{slide}', [BannerLogoController::class, 'updateSlide'])->name('banner-logo.slide');
+    Route::put('/banner-logo/theme', [BannerLogoController::class, 'updateTheme'])->name('banner-logo.theme');
 
-    Route::get('/profil', function () {
-        return view('admin.pages.profil');
-    })->name('profil');
+    // Profil CRUD
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    Route::post('/profil', [ProfilController::class, 'store'])->name('profil.store');
+    Route::put('/profil/{profil}', [ProfilController::class, 'update'])->name('profil.update');
+    Route::delete('/profil/{profil}', [ProfilController::class, 'destroy'])->name('profil.destroy');
 
-    Route::get('/kurikulum', function () {
-        return view('admin.pages.kurikulum');
-    })->name('kurikulum');
+    // Kurikulum CRUD
+    Route::get('/kurikulum', [CurriculumController::class, 'index'])->name('kurikulum');
+    Route::post('/kurikulum', [CurriculumController::class, 'store'])->name('kurikulum.store');
+    Route::put('/kurikulum/{kurikulum}', [CurriculumController::class, 'update'])->name('kurikulum.update');
+    Route::delete('/kurikulum/{kurikulum}', [CurriculumController::class, 'destroy'])->name('kurikulum.destroy');
 
-    Route::get('/pengaturan', function () {
-        return view('admin.pages.pengaturan');
-    })->name('pengaturan');
+    // Pengaturan Website & Footer
+    Route::get('/pengaturan', [SettingController::class, 'index'])->name('pengaturan');
+    Route::post('/pengaturan', [SettingController::class, 'update'])->name('pengaturan.update');
 });
 
 

@@ -46,6 +46,12 @@
             });
         }
 
+        @if(session('success'))
+            document.addEventListener('DOMContentLoaded', function() {
+                notifySuccess(@json(session('success')));
+            });
+        @endif
+
         function notifyDelete(title, callback) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
@@ -65,15 +71,6 @@
                     if (typeof callback === 'function') {
                         callback();
                     }
-                    Swal.fire({
-                        title: 'Berhasil Dihapus!',
-                        text: 'Data telah berhasil dihapus dari sistem.',
-                        icon: 'success',
-                        confirmButtonColor: '#1e3a8a',
-                        customClass: {
-                            popup: 'rounded-3xl shadow-2xl border border-slate-200'
-                        }
-                    });
                 }
             });
         }
@@ -144,17 +141,20 @@
         <div class="p-4 border-t border-slate-800">
             <div class="flex items-center gap-3 p-2 rounded-xl bg-slate-800/60 mb-2">
                 <div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-xs">
-                    AD
+                    {{ strtoupper(substr(Auth::user()->name ?? 'AD', 0, 2)) }}
                 </div>
                 <div class="flex-1 min-w-0">
-                    <p class="text-xs font-bold text-white truncate">Administrator Prodi</p>
-                    <p class="text-[11px] text-slate-400 truncate">pariwisata@unidha.ac.id</p>
+                    <p class="text-xs font-bold text-white truncate">{{ Auth::user()->name ?? 'Administrator Prodi' }}</p>
+                    <p class="text-[11px] text-slate-400 truncate">{{ Auth::user()->email ?? 'admin@pariwisata.unidha.ac.id' }}</p>
                 </div>
             </div>
-            <a href="{{ route('login') }}" class="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-lg text-xs font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                <span>Keluar (Logout)</span>
-            </a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-lg text-xs font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    <span>Keluar (Logout)</span>
+                </button>
+            </form>
         </div>
     </aside>
 
@@ -173,7 +173,10 @@
                 <a href="{{ route('admin.dashboard') }}" class="p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 whitespace-nowrap">Dashboard</a>
                 <a href="{{ route('admin.berita') }}" class="p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 whitespace-nowrap">Berita</a>
                 <a href="{{ route('admin.banner-logo') }}" class="p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 whitespace-nowrap text-blue-900 font-bold">Logo & Banner</a>
-                <a href="{{ route('login') }}" class="p-1.5 sm:p-2 text-rose-600 whitespace-nowrap">Keluar</a>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="p-1.5 sm:p-2 text-rose-600 whitespace-nowrap font-semibold">Keluar</button>
+                </form>
             </div>
 
             <div class="hidden sm:flex items-center gap-4">

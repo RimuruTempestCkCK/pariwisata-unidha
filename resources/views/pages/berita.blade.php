@@ -27,43 +27,37 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
         <div>
             <h2 class="text-xl font-bold text-slate-900">Semua Publikasi</h2>
-            <p class="text-xs text-slate-500">Menampilkan {{ count($newsList) }} warta terbaru dari program studi</p>
-        </div>
-        <div class="flex items-center gap-2">
-            <span class="text-xs font-semibold text-slate-500">Kategori:</span>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-900 text-white">Semua</span>
-            <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">Akademik</span>
-            <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">Kemahasiswaan</span>
+            <p class="text-xs text-slate-500">Menampilkan {{ $newsList->total() }} warta terbaru dari program studi</p>
         </div>
     </div>
 
     <!-- News Grid -->
-    @if(count($newsList) > 0)
+    @if($newsList->count() > 0)
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($newsList as $item)
                 <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col group">
-                    <a href="{{ route('berita.show', $item['slug']) }}" class="relative h-52 overflow-hidden bg-slate-100 block">
-                        <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <a href="{{ route('berita.show', $item->slug) }}" class="relative h-52 overflow-hidden bg-slate-100 block">
+                        <img src="{{ $item->image }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute top-3 left-3 bg-slate-900/85 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded font-semibold">
-                            {{ $item['category'] }}
+                            {{ $item->category }}
                         </div>
                     </a>
                     <div class="p-6 flex flex-col flex-grow">
                         <div class="flex items-center gap-2 text-xs text-slate-400 mb-2">
-                            <span>{{ $item['date'] }}</span>
+                            <span>{{ $item->date_text ?? $item->created_at->translatedFormat('d F Y') }}</span>
                             <span>&bull;</span>
-                            <span>{{ $item['author'] }}</span>
+                            <span>{{ $item->author }}</span>
                         </div>
                         <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-900 transition-colors line-clamp-2 mb-2 leading-snug">
-                            <a href="{{ route('berita.show', $item['slug']) }}">
-                                {{ $item['title'] }}
+                            <a href="{{ route('berita.show', $item->slug) }}">
+                                {{ $item->title }}
                             </a>
                         </h3>
                         <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 mb-4 leading-relaxed">
-                            {{ $item['summary'] }}
+                            {{ $item->summary }}
                         </p>
                         <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <a href="{{ route('berita.show', $item['slug']) }}" class="text-xs font-bold text-blue-900 group-hover:text-amber-600 flex items-center gap-1 transition-colors">
+                            <a href="{{ route('berita.show', $item->slug) }}" class="text-xs font-bold text-blue-900 group-hover:text-amber-600 flex items-center gap-1 transition-colors">
                                 <span>Baca Selengkapnya</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </a>
@@ -74,10 +68,8 @@
             @endforeach
         </div>
 
-        <!-- Pagination UI Mockup (clean & disabled next as list is short) -->
-        <div class="pt-8 flex items-center justify-center gap-2">
-            <span class="px-4 py-2 rounded-lg bg-blue-900 text-white text-xs font-bold">1</span>
-            <span class="px-4 py-2 rounded-lg bg-slate-100 text-slate-400 text-xs font-semibold cursor-not-allowed">Halaman 1 dari 1</span>
+        <div class="pt-8">
+            {{ $newsList->links() }}
         </div>
     @else
         <!-- Empty State -->

@@ -49,33 +49,45 @@
                 <p class="text-xs text-slate-500">Masukkan kredensial akun administrator Anda.</p>
             </div>
 
-            <form action="{{ route('admin.dashboard') }}" method="GET" class="space-y-4">
+            @if ($errors->any())
+                <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
+                @csrf
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1.5">Alamat Email / NIDN</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"/></svg>
                         </span>
-                        <input type="email" value="admin@pariwisata.unidha.ac.id" placeholder="admin@pariwisata.unidha.ac.id" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-slate-50/50">
+                        <input type="email" name="email" value="{{ old('email', 'admin@pariwisata.unidha.ac.id') }}" required placeholder="admin@pariwisata.unidha.ac.id" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-slate-50/50">
                     </div>
                 </div>
 
                 <div>
                     <div class="flex items-center justify-between mb-1.5">
                         <label class="block text-xs font-bold text-slate-700">Kata Sandi</label>
-                        <a href="#" onclick="alert('Pada mode demonstrasi UI ini, kata sandi default dapat langsung digunakan.'); return false;" class="text-xs text-amber-600 hover:text-amber-700 font-semibold">Lupa sandi?</a>
                     </div>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                         </span>
-                        <input type="password" value="password123" placeholder="••••••••" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-slate-50/50">
+                        <input type="password" name="password" required value="admin123" placeholder="••••••••" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-slate-50/50">
                     </div>
                 </div>
 
                 <div class="flex items-center justify-between text-xs text-slate-600 pt-1">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="rounded border-slate-300 text-amber-600 focus:ring-amber-500">
+                        <input type="checkbox" name="remember" checked class="rounded border-slate-300 text-amber-600 focus:ring-amber-500">
                         <span>Ingat sesi masuk</span>
                     </label>
                 </div>

@@ -4,36 +4,11 @@
 @section('meta_description', 'Program Studi S1 Pariwisata Universitas Dharma Andalas Padang. Slogan: Creating Memories, Inspiring Journey, And Connecting Cultures, Creating Futures.')
 
 @section('content')
-<!-- HERO SLIDER SECTION (Reference: web-sekolah-starter.vercel.app) -->
+<!-- HERO SLIDER SECTION (Reference: web-sekolah-starter.vercel.app & Authentic Data) -->
 <section class="relative min-h-[580px] lg:min-h-[680px] flex items-center text-white overflow-hidden bg-slate-950" 
          x-data="{
             activeSlide: 0,
-            slides: [
-                {
-                    image: 'https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-03-at-16.18.04.jpeg',
-                    eyebrow: 'Program Studi S1 Pariwisata UNIDHA',
-                    title: 'Selamat Datang di S1 Pariwisata UNIDHA',
-                    subtitle: '“Creating Memories, Inspiring Journey, And Connecting Cultures, Creating Futures”'
-                },
-                {
-                    image: 'https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/Hotel-MICE-Modern-di-Pusat-Ubud-SenS-Hotel-Spa-Hadirkan-Ballroom-dan-Fasilitas-Konferensi-Lengkap-1-e1747237185343.jpg',
-                    eyebrow: 'Hospitality & MICE Industri',
-                    title: 'Pendidikan Berkualitas & Berwawasan Global',
-                    subtitle: 'Mempersiapkan sarjana pariwisata yang visioner, kompeten, dan siap memimpin industri hospitality modern.'
-                },
-                {
-                    image: 'https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/gambar-tour-guide-10.jpg',
-                    eyebrow: 'Tour & Destinasi Berkelanjutan',
-                    title: 'Kembangkan Potensi Wisata Nusantara',
-                    subtitle: 'Praktek lapangan terpadu, kepemanduan profesional, dan kolaborasi destinasi pariwisata Minangkabau.'
-                },
-                {
-                    image: 'https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/QzxyPf2tOCFlYzYknAmqPYhGnx00ti4HEadIQdJa-scaled.jpg',
-                    eyebrow: 'Penerimaan Mahasiswa Baru 2026',
-                    title: 'Bergabung Bersama S1 Pariwisata UNIDHA',
-                    subtitle: 'Wujudkan masa depan gemilang dengan gelar Sarjana Pariwisata (S.Par.) bersama pengajar terbaik.'
-                }
-            ],
+            slides: {{ $slides->toJson() }},
             timer: null,
             init() {
                 this.startAutoSlide();
@@ -47,10 +22,14 @@
                 if (this.timer) clearInterval(this.timer);
             },
             nextSlide() {
-                this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                if (this.slides.length > 0) {
+                    this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                }
             },
             prevSlide() {
-                this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
+                if (this.slides.length > 0) {
+                    this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
+                }
             },
             goToSlide(index) {
                 this.activeSlide = index;
@@ -61,32 +40,15 @@
 
     <!-- BACKGROUND SLIDES -->
     <div class="absolute inset-0 z-0 bg-slate-950">
-        <!-- Static Default First Slide (Instant display before JS hydrates) -->
-        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 0 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
-            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-03-at-16.18.04.jpeg" 
-                 alt="S1 Pariwisata UNIDHA" 
-                 class="w-full h-full object-cover object-center">
-        </div>
+        @foreach($slides as $index => $slide)
+            <div class="absolute inset-0 w-full h-full" :class="activeSlide === {{ $index }} ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
+                <img src="{{ $slide->image }}" 
+                     alt="{{ $slide->title }}" 
+                     class="w-full h-full object-cover object-center">
+            </div>
+        @endforeach
 
-        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 1 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
-            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/Hotel-MICE-Modern-di-Pusat-Ubud-SenS-Hotel-Spa-Hadirkan-Ballroom-dan-Fasilitas-Konferensi-Lengkap-1-e1747237185343.jpg" 
-                 alt="Hospitality & MICE" 
-                 class="w-full h-full object-cover object-center">
-        </div>
-
-        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 2 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
-            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/gambar-tour-guide-10.jpg" 
-                 alt="Tour & Travel" 
-                 class="w-full h-full object-cover object-center">
-        </div>
-
-        <div class="absolute inset-0 w-full h-full" :class="activeSlide === 3 ? 'opacity-100 z-1' : 'opacity-0 z-0'" style="transition: opacity 1s ease-in-out;">
-            <img src="https://pariwisata.unidha.ac.id/wp-content/uploads/2026/07/QzxyPf2tOCFlYzYknAmqPYhGnx00ti4HEadIQdJa-scaled.jpg" 
-                 alt="SPMB UNIDHA" 
-                 class="w-full h-full object-cover object-center">
-        </div>
-
-        <!-- Professional Multi-layer Dark Gradient Overlay for Maximum Typography Clarity -->
+        <!-- Multi-layer Dark Gradient Overlay for Maximum Typography Clarity -->
         <div class="absolute inset-0 bg-slate-950/75 z-2 pointer-events-none"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-2 pointer-events-none"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40 z-2 pointer-events-none"></div>
@@ -97,18 +59,18 @@
         <div class="max-w-3xl space-y-6">
             <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-bold tracking-wider uppercase backdrop-blur-md">
                 <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                <span x-text="slides[activeSlide].eyebrow"></span>
+                <span x-text="slides[activeSlide]?.eyebrow || '{{ $landingElements['Hero Headline Tag']->konten ?? 'Let\'s Go to Join With Us' }}'"></span>
             </span>
 
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-md" x-text="slides[activeSlide].title">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-md" x-text="slides[activeSlide]?.title || 'Selamat Datang di S1 Pariwisata UNIDHA'">
             </h1>
 
-            <p class="text-base sm:text-xl text-slate-200 leading-relaxed font-light drop-shadow-sm max-w-2xl" x-text="slides[activeSlide].subtitle">
+            <p class="text-base sm:text-xl text-slate-200 leading-relaxed font-light drop-shadow-sm max-w-2xl" x-text="slides[activeSlide]?.subtitle || '{{ $landingElements['Slogan Utama Hero']->konten ?? '“Creating Memories, Inspiring Journey, And Connecting Cultures, Creating Futures”' }}'">
             </p>
 
             <div class="pt-2 flex flex-wrap items-center gap-4">
                 <a href="{{ route('profil') }}" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-amber-400 hover:bg-amber-300 transition-all shadow-lg shadow-amber-400/20 transform hover:-translate-y-0.5">
-                    <span>Tentang Program Studi</span>
+                    <span>{{ $landingElements['Deskripsi Pengantar Hero']->cta_text ?? 'Tentang Program Studi' }}</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
                 <a href="{{ route('akademik') }}" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-white/10 hover:bg-white/20 border border-white/25 backdrop-blur-md transition-all">
@@ -145,7 +107,7 @@
     </div>
 </section>
 
-<!-- ===================== QUICK LINKS (Reference: web-sekolah-starter.vercel.app) ===================== -->
+<!-- ===================== QUICK LINKS ===================== -->
 <section class="relative z-20 -mt-10 lg:-mt-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
         <!-- Card 1: Pendaftaran -->
@@ -198,7 +160,7 @@
     </div>
 </section>
 
-<!-- ===================== PROFIL SINGKAT (Reference: web-sekolah-starter.vercel.app) ===================== -->
+<!-- ===================== PROFIL SINGKAT ===================== -->
 <section class="py-16 sm:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -220,51 +182,39 @@
                 </div>
             </div>
 
-            <!-- Content -->
+            <!-- Content Column -->
             <div class="lg:col-span-7 space-y-6">
                 <div>
-                    <span class="text-xs font-extrabold text-amber-600 uppercase tracking-widest block mb-1">
-                        Profil Singkat
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight">
-                        Tentang Yayasan Dharma Andalas & Universitas Dharma Andalas
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-600 block mb-1">Sekilas Program Studi</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                        Mendidik Insan Pariwisata Berdaya Saing Global di Ranah Minang
                     </h2>
                 </div>
-
-                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    <em>Yayasan Pendidikan Dharma Andalas</em> didirikan dan dibina langsung oleh Ikatan Alumni Universitas Andalas berdasarkan Akta Perubahan No. 39 tanggal 14 April 2011 Notaris H. Khamisli, SH, SK Kemenkumham RI Nomor AHU-4807.AH.01.04 Tahun 2011. Yayasan ini telah berpartisipasi aktif memajukan pengembangan sumber daya manusia melalui pendirian STIE Dharma Andalas hingga transformasi menjadi <strong>Universitas Dharma Andalas (UNIDHA)</strong> berdasarkan SK Mendikbud RI No. 254/E/O/2014.
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                    {{ $landingElements['Pengenalan UNIDHA']->konten ?? 'Program Studi S1 Pariwisata berada di bawah Fakultas Ekonomi dan Bisnis Universitas Dharma Andalas (UNIDHA), didirikan untuk merespons percepatan perkembangan pariwisata nasional dan internasional, khususnya mengangkat potensi kekayaan wisata alam dan kebudayaan Minangkabau.' }}
                 </p>
 
-                <ul class="space-y-3 text-sm text-slate-700">
-                    <li class="flex items-center gap-3">
-                        <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <!-- Points Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold text-sm mb-2">
+                            01
                         </div>
-                        <span>Kurikulum terapan berbasis industri hospitality & sustainable tourism</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        <h4 class="font-bold text-slate-900 text-sm">Kurikulum Berbasis Industri</h4>
+                        <p class="text-xs text-slate-500">Mencakup perhotelan, MICE, sustainable tourism, dan bisnis digital travel.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-900 flex items-center justify-center font-bold text-sm mb-2">
+                            02
                         </div>
-                        <span>Dosen praktisi dan akademisi bergelar Magister & Doktor Pariwisata</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                        </div>
-                        <span>Jejaring kemitraan hotel berbintang, biro perjalanan, dan Dinas Pariwisata</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                        </div>
-                        <span>Lokasi strategis di pusat Kota Padang dengan sarana belajar terpadu</span>
-                    </li>
-                </ul>
+                        <h4 class="font-bold text-slate-900 text-sm">Lokasi Kampus Strategis</h4>
+                        <p class="text-xs text-slate-500">Terletak di Jl. Sawahan No. 103 Padang dengan akses sarana transportasi mudah.</p>
+                    </div>
+                </div>
 
-                <div class="pt-2">
-                    <a href="{{ route('profil') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-md">
-                        <span>Selengkapnya Tentang Kami</span>
+                <div class="pt-2 flex items-center gap-4">
+                    <a href="{{ route('profil') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-blue-900 hover:bg-blue-800 transition-colors shadow-md">
+                        <span>Baca Profil Selengkapnya</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 </div>
@@ -273,28 +223,23 @@
     </div>
 </section>
 
-<!-- ===================== COUNTER / STATISTIK (Reference: web-sekolah-starter.vercel.app) ===================== -->
-<section class="py-16 sm:py-20 bg-gradient-to-r from-blue-950 via-slate-900 to-blue-900 text-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center max-w-2xl mx-auto mb-12 space-y-2">
-            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block">UNIDHA dalam Angka</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Komitmen Mutu & Pengembangan Pendidikan</h2>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+<!-- ===================== COUNTER STATS ===================== -->
+<section class="py-16 sm:py-20 bg-gradient-to-r from-blue-950 via-slate-900 to-blue-950 text-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
                 <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                 </div>
-                <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">3.185+</div>
-                <div class="text-xs text-slate-300">Alumni Dihasilkan</div>
+                <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">1992</div>
+                <div class="text-xs text-slate-300">Tahun Berdiri Yayasan</div>
             </div>
 
             <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
                 <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-sky-400/20 text-sky-400 flex items-center justify-center">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                 </div>
-                <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">14</div>
+                <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">14+</div>
                 <div class="text-xs text-slate-300">Program Studi di UNIDHA</div>
             </div>
 
@@ -317,7 +262,7 @@
     </div>
 </section>
 
-<!-- ===================== PROSPEK KARIER (Reference: pariwisata.unidha.ac.id & web-sekolah-starter card style) ===================== -->
+<!-- ===================== PROSPEK KARIER ===================== -->
 <section class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-14 space-y-2">
@@ -342,12 +287,12 @@
                         Sektor Perhotelan, Akomodasi & MICE
                     </h3>
                     <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        Sektor utama penyerap sarjana pariwisata. Memiliki jalur cepat manajerial di perhotelan, event organizer, convention & wedding planner berskala internasional.
+                        {{ $landingElements['Pilar 01: Perhotelan & MICE']->konten ?? 'Sektor utama penyerap sarjana pariwisata. Memiliki jalur cepat manajerial di perhotelan, event organizer, convention & wedding planner berskala internasional.' }}
                     </p>
                     <div class="pt-4 mt-auto border-t border-slate-100 flex items-center justify-between text-xs">
                         <span class="text-slate-500 font-semibold flex items-center gap-1.5">
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                            60+ Mahasiswa
+                            Konsentrasi Pilihan
                         </span>
                         <a href="{{ route('akademik') }}" class="font-bold text-amber-600 hover:text-amber-700 uppercase tracking-wider flex items-center gap-1">
                             <span>Pelajari</span>
@@ -372,12 +317,12 @@
                         Industri Perjalanan & Destinasi (Tour & Travel)
                     </h3>
                     <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        Merancang trip itinerary, mengembangkan desa wisata, pengelola destinasi berkelanjutan, hingga menjadi Tour Guide bersertifikat kompetensi nasional.
+                        {{ $landingElements['Pilar 02: Tour & Destinasi']->konten ?? 'Merancang trip itinerary, mengembangkan desa wisata, pengelola destinasi berkelanjutan, hingga menjadi Tour Guide bersertifikat kompetensi nasional.' }}
                     </p>
                     <div class="pt-4 mt-auto border-t border-slate-100 flex items-center justify-between text-xs">
                         <span class="text-slate-500 font-semibold flex items-center gap-1.5">
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                            55+ Mahasiswa
+                            Konsentrasi Pilihan
                         </span>
                         <a href="{{ route('akademik') }}" class="font-bold text-amber-600 hover:text-amber-700 uppercase tracking-wider flex items-center gap-1">
                             <span>Pelajari</span>
@@ -402,12 +347,12 @@
                         Instansi Pemerintah & Akademisi
                     </h3>
                     <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        Peluang besar di Kementerian Pariwisata dan Ekonomi Kreatif (Kemenparekraf), Dinas Pariwisata Daerah, penyusun regulasi promosi destinasi, dan akademisi.
+                        {{ $landingElements['Pilar 03: Pemerintah & Akademisi']->konten ?? 'Peluang besar di Kementerian Pariwisata dan Ekonomi Kreatif (Kemenparekraf), Dinas Pariwisata Daerah, penyusun regulasi promosi destinasi, dan akademisi.' }}
                     </p>
                     <div class="pt-4 mt-auto border-t border-slate-100 flex items-center justify-between text-xs">
                         <span class="text-slate-500 font-semibold flex items-center gap-1.5">
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                            40+ Mahasiswa
+                            Peluang Karier Luas
                         </span>
                         <a href="{{ route('akademik') }}" class="font-bold text-amber-600 hover:text-amber-700 uppercase tracking-wider flex items-center gap-1">
                             <span>Pelajari</span>
@@ -420,7 +365,7 @@
     </div>
 </section>
 
-<!-- ===================== BERITA TERBARU (Reference: web-sekolah-starter.vercel.app card layout) ===================== -->
+<!-- ===================== BERITA TERBARU ===================== -->
 <section class="py-16 sm:py-24 bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
@@ -441,33 +386,33 @@
             @forelse($latestNews as $item)
                 <article class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col group hover:-translate-y-1">
                     <div class="relative h-52 overflow-hidden bg-slate-100">
-                        <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="{{ $item->image }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md text-amber-400 text-xs px-3 py-1 rounded-full font-bold shadow-md">
-                            {{ $item['category'] }}
+                            {{ $item->category }}
                         </span>
                     </div>
                     <div class="p-6 flex flex-col flex-grow space-y-3">
                         <div class="flex items-center gap-3 text-xs text-slate-400">
                             <span class="flex items-center gap-1">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                                {{ $item['date'] }}
+                                {{ $item->date_text ?? $item->created_at->translatedFormat('d F Y') }}
                             </span>
                             <span>&bull;</span>
                             <span class="flex items-center gap-1">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                                {{ $item['author'] }}
+                                {{ $item->author }}
                             </span>
                         </div>
                         <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-900 transition-colors line-clamp-2 leading-snug">
-                            <a href="{{ route('berita.show', $item['slug']) }}">
-                                {{ $item['title'] }}
+                            <a href="{{ route('berita.show', $item->slug) }}">
+                                {{ $item->title }}
                             </a>
                         </h3>
                         <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
-                            {{ $item['summary'] }}
+                            {{ $item->summary }}
                         </p>
                         <div class="mt-auto pt-4 border-t border-slate-100">
-                            <a href="{{ route('berita.show', $item['slug']) }}" class="text-xs font-bold text-blue-900 group-hover:text-amber-600 flex items-center gap-1.5 transition-colors">
+                            <a href="{{ route('berita.show', $item->slug) }}" class="text-xs font-bold text-blue-900 group-hover:text-amber-600 flex items-center gap-1.5 transition-colors">
                                 <span>Baca Selengkapnya</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                             </a>
@@ -483,7 +428,7 @@
     </div>
 </section>
 
-<!-- ===================== CTA SPMB 2026 (Reference: web-sekolah-starter banner style) ===================== -->
+<!-- ===================== CTA SPMB 2026 ===================== -->
 <section class="py-16 sm:py-20 bg-slate-950 text-white relative overflow-hidden">
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="rounded-3xl p-8 sm:p-14 bg-gradient-to-r from-blue-950 via-slate-900 to-amber-950/40 border border-slate-800 shadow-2xl">
@@ -493,10 +438,10 @@
                         Penerimaan Mahasiswa Baru (SPMB 2026)
                     </span>
                     <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
-                        Wujudkan Cita-cita Karier Pariwisata Anda Bersama UNIDHA
+                        {{ $landingElements['Banner Penerimaan SPMB 2026']->parameter ?? 'Wujudkan Cita-cita Karier Pariwisata Anda Bersama UNIDHA' }}
                     </h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-                        Bergabunglah dengan Prodi Pariwisata dan temukan bagaimana cara menghubungkan budaya, menciptakan kenangan tak terlupakan, dan membangun karier tanpa batas di kancah internasional.
+                        {{ $landingElements['Banner Penerimaan SPMB 2026']->konten ?? 'Bergabunglah dengan Prodi Pariwisata dan temukan bagaimana cara menghubungkan budaya, menciptakan kenangan tak terlupakan, dan membangun karier tanpa batas di kancah internasional.' }}
                     </p>
                     <div class="flex flex-wrap gap-4 pt-2 text-xs text-amber-300 font-semibold">
                         <span class="flex items-center gap-1.5">
@@ -517,7 +462,7 @@
                 <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
                     <a href="{{ route('spmb') }}" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-extrabold text-sm text-slate-950 bg-amber-400 hover:bg-amber-300 transition-all shadow-xl shadow-amber-400/20 transform hover:-translate-y-0.5">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                        <span>Daftar SPMB 2026 Online</span>
+                        <span>{{ $landingElements['Banner Penerimaan SPMB 2026']->cta_text ?? 'Daftar SPMB 2026 Online' }}</span>
                     </a>
                     <a href="{{ route('kontak') }}" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all">
                         <span>Konsultasi Panitia Penerimaan</span>

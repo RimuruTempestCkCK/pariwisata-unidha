@@ -52,7 +52,7 @@
                         8
                     </div>
                     <h4 class="font-bold text-slate-900 text-sm">Masa Studi Normal</h4>
-                    <p class="text-xs text-slate-500">8 Semester (4 Tahun) dengan beban studi sekitar 144 SKS.</p>
+                    <p class="text-xs text-slate-500">8 Semester (4 Tahun) dengan beban studi {{ $curricula->sum('sks') ?: 144 }} SKS.</p>
                 </div>
                 <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
                     <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
@@ -72,52 +72,61 @@
         </div>
     </section>
 
-    <!-- Struktur Kurikulum Contoh/Representatif -->
+    <!-- Struktur Kurikulum & Mata Kuliah Database -->
     <section class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm space-y-8">
-        <div>
-            <span class="text-xs font-bold text-blue-900 tracking-wider uppercase block">Kerangka Kurikulum</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Konsentrasi & Mata Kuliah Unggulan</h2>
-            <p class="text-slate-600 text-xs sm:text-sm mt-1">
-                Gambaran bidang keilmuan yang dipelajari selama perkuliahan di S1 Pariwisata:
-            </p>
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <span class="text-xs font-bold text-blue-900 tracking-wider uppercase block">Kerangka Kurikulum</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Daftar Mata Kuliah Unggulan</h2>
+                <p class="text-slate-600 text-xs sm:text-sm mt-1">
+                    Struktur kurikulum yang dipelajari selama perkuliahan di S1 Pariwisata UNIDHA:
+                </p>
+            </div>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-50 text-blue-900 font-bold text-xs whitespace-nowrap self-start md:self-auto">
+                Total: {{ count($curricula) }} Mata Kuliah
+            </span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Kelompok 1 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                <div class="text-amber-600 font-bold text-xs uppercase tracking-wider">Kelompok 01</div>
-                <h3 class="text-base font-bold text-slate-900">Hospitality & Akomodasi</h3>
-                <ul class="text-xs text-slate-600 space-y-2">
-                    <li class="flex items-center gap-2"><span>&bull;</span> Manajemen Perhotelan & Resort</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Tata Kelola MICE & Event Planning</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Food & Beverage Operations</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Service Excellence & Hospitality Ethics</li>
-                </ul>
-            </div>
-
-            <!-- Kelompok 2 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                <div class="text-blue-600 font-bold text-xs uppercase tracking-wider">Kelompok 02</div>
-                <h3 class="text-base font-bold text-slate-900">Destinasi & Pariwisata Berkelanjutan</h3>
-                <ul class="text-xs text-slate-600 space-y-2">
-                    <li class="flex items-center gap-2"><span>&bull;</span> Perencanaan & Pengembangan Destinasi</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Ekowisata & Pariwisata Berbasis Masyarakat</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Geografi Pariwisata Indonesia</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Konservasi Warisan Budaya & Sejarah</li>
-                </ul>
-            </div>
-
-            <!-- Kelompok 3 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                <div class="text-emerald-600 font-bold text-xs uppercase tracking-wider">Kelompok 03</div>
-                <h3 class="text-base font-bold text-slate-900">Bisnis & Pemasaran Pariwisata</h3>
-                <ul class="text-xs text-slate-600 space-y-2">
-                    <li class="flex items-center gap-2"><span>&bull;</span> Pemasaran Digital Pariwisata</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Manajemen Biro Perjalanan & Tiket</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Kewirausahaan Pariwisata Kreatif</li>
-                    <li class="flex items-center gap-2"><span>&bull;</span> Komunikasi Bisnis & Bahasa Internasional</li>
-                </ul>
-            </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider font-bold border-b border-slate-200">
+                    <tr>
+                        <th class="px-5 py-3.5 w-24">Kode</th>
+                        <th class="px-5 py-3.5">Nama Mata Kuliah & Uraian</th>
+                        <th class="px-5 py-3.5 w-36">Konsentrasi</th>
+                        <th class="px-5 py-3.5 w-24 text-center">Beban SKS</th>
+                        <th class="px-5 py-3.5 w-28 text-center">Semester</th>
+                        <th class="px-5 py-3.5 w-24 text-center">Sifat</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700">
+                    @forelse($curricula as $matkul)
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-5 py-4 font-mono font-bold text-blue-900">{{ $matkul->kode }}</td>
+                            <td class="px-5 py-4">
+                                <span class="font-bold text-slate-900 text-sm block">{{ $matkul->nama }}</span>
+                                <span class="text-[11px] text-slate-400">{{ $matkul->deskripsi }}</span>
+                            </td>
+                            <td class="px-5 py-4">
+                                <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800">
+                                    {{ $matkul->konsentrasi }}
+                                </span>
+                            </td>
+                            <td class="px-5 py-4 text-center font-bold text-slate-900">{{ $matkul->sks }} SKS</td>
+                            <td class="px-5 py-4 text-center font-semibold text-slate-600">Semester {{ $matkul->semester }}</td>
+                            <td class="px-5 py-4 text-center">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {{ $matkul->sifat === 'Wajib' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800' }}">
+                                    {{ $matkul->sifat }}
+                                </span>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="px-5 py-8 text-center text-slate-400">Daftar mata kuliah sedang dimutakhirkan.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
 
         <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-200 text-xs text-slate-600 flex items-start gap-3">
