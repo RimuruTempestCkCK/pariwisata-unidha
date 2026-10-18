@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('date_text')->nullable();
             $table->string('image')->nullable();
             $table->text('summary')->nullable();
-            $table->json('content')->nullable();
+            $table->longText('content')->nullable();
             $table->json('tags')->nullable();
             $table->boolean('is_published')->default(true);
             $table->timestamps();

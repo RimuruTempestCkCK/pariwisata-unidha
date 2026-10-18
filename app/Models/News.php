@@ -20,7 +20,6 @@ class News extends Model
     ];
 
     protected $casts = [
-        'content' => 'array',
         'tags' => 'array',
         'is_published' => 'boolean',
     ];

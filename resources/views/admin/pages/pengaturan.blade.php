@@ -32,6 +32,31 @@
             </div>
         </div>
 
+        <!-- Pengaturan Header Tata Kelola & Pengajar (Halaman Profil) -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-4">
+            <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold text-amber-600 uppercase tracking-wider block">Halaman Profil</span>
+                    <h2 class="text-base font-bold text-slate-900 mt-0.5">Judul & Deskripsi Seksi Tata Kelola / Pimpinan</h2>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800">Tata Kelola & Pengajar</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Eyebrow / Subjudul Atas</label>
+                    <input type="text" name="pimpinan_eyebrow" value="{{ $settings['pimpinan_eyebrow'] ?? 'Tata Kelola & Pengajar' }}" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Judul Utama Seksi</label>
+                    <input type="text" name="pimpinan_title" value="{{ $settings['pimpinan_title'] ?? 'Pengelola Program Studi & Pimpinan' }}" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat Seksi</label>
+                <textarea name="pimpinan_desc" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none">{{ $settings['pimpinan_desc'] ?? 'Didukung oleh tenaga pendidik akademisi dan praktisi profesional di bidang manajemen kepariwisataan, perhotelan, dan destinasi.' }}</textarea>
+            </div>
+        </div>
+
         <!-- Pengaturan Footer Website -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-4">
             <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
